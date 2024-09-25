@@ -8,9 +8,10 @@ public class Peca {
     private double preco;
     private int quantidadeEstoque;
 
-    public Peca(int idPeca,  String nome, String fabricante, double preco, int quantidadeEstoque) {
+    public Peca(int idPeca, String nome, String categoria,String fabricante, double preco, int quantidadeEstoque) {
         this.idPeca = idPeca;
         this.nome = nome;
+        this.categoria = categoria;
         this.fabricante = fabricante;
         this.preco = preco;
         this.quantidadeEstoque = quantidadeEstoque;
