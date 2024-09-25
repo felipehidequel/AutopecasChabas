@@ -54,5 +54,8 @@ public class NotaPedido {
     public void setValorTotal(double valorTotal){
         this.valorTotal = valorTotal;
     }
-    
+
+    public String toString(){
+        return "ID NOTA: " + idNotaPedido + "\n" + "Pedido: " + "\t" + pedido + "\t" + quantidadePeca + "\n" + "Valor Total: " + "\t" + valorTotal + "\n";
+    }
 }
