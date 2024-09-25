@@ -1,3 +1,5 @@
+package model;
+
 public class Pessoa{
     private String id;
     private String nome;

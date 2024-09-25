@@ -1,3 +1,5 @@
+package model;
+
 class Cliente extends Pessoa{
     private String telefone;
     private String cpf;
@@ -16,7 +18,7 @@ class Cliente extends Pessoa{
     }
 
     public String getNome(){
-        return (nome);
+        return (this.nome);
     }
     public void setNome(String nome){
         this.nome = nome;
