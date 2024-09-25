@@ -1,10 +1,12 @@
+package model;
+
 public class Pessoa{
     private String id;
     private String nome;
 
     public Pessoa(String id, String nome){
         this.id = id;
-        this.nome = noem;
+        this.nome = nome;
     }
 
     public String getId(){
