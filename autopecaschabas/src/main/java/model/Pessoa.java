@@ -4,7 +4,7 @@ public class Pessoa{
 
     public Pessoa(String id, String nome){
         this.id = id;
-        this.nome = noem;
+        this.nome = nome;
     }
 
     public String getId(){
@@ -24,7 +24,7 @@ public class Pessoa{
 
     @Override
     public String toString(){
-        return();
+        return "Nome: " + nome + "\n" + "ID: " + id + "\n";
     }
 
 }

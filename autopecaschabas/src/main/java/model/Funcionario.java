@@ -26,8 +26,8 @@ class Funcionario extends Pessoa{
         this.login = login;
     }
 
-    public String getGerente(){
-        return (gerente);
+    public boolean getGerente(){
+        return gerente;
     }
 
     public void setGerente(Boolean gerente){
@@ -36,7 +36,7 @@ class Funcionario extends Pessoa{
 
     @Override
     public String toString(){
-        return();
+        return "";
     }
 
 }
