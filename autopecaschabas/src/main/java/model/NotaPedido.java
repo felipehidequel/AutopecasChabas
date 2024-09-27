@@ -12,7 +12,7 @@ public class NotaPedido {
         this.peca = peca;
         this.pedido = pedido;
         this.quantidadePeca = qntdPeca;
-        this.valorTotal = valorTotal;
+        this.valorTotal = valor;
     }
 
     public int getIdNotaPedido(){
