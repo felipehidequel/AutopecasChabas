@@ -1,0 +1,54 @@
+##
+
+CREATE TABLE cliente (
+    id_cliente SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    telefone VARCHAR(20) NOT NULL,
+    cpf VARCHAR(11) NOT NULL
+);
+
+CREATE TABLE funcionario (
+    id_func SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    login VARCHAR(20) NOT NULL,
+    senha VARCHAR(20) NOT NULL,
+    gerente BOOLEAN NOT NULL
+);
+
+CREATE TABLE pedido (
+    id_pedido SERIAL PRIMARY KEY,
+    data_pedido DATE NOT NULL,
+    status VARCHAR(10) NOT NULL,
+    id_func INT NOT NULL,
+    id_cliente INT NOT NULL,
+    FOREIGN KEY (id_func) REFERENCES funcionario(id_func) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE peca(
+	id_peca SERIAL PRIMARY KEY,
+	nome  VARCHAR(20) NOT NULL,
+	categoria  VARCHAR(20) NOT NULL,
+	fabricante  VARCHAR(20) NOT NULL,
+	preco DOUBLE PRECISION NOT NULL,
+	quantidade_estoque INT NOT NULL
+);
+
+CREATE TABLE nota_pedido (
+	id_nota SERIAL PRIMARY KEY,
+	id_peca INT NOT NULL,
+	id_pedido INT NOT NULL,
+	quantidade_peca  INT NOT NULL,
+	valor_total  DOUBLE PRECISION NOT NULL,
+	FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+    FOREIGN KEY (id_peca) REFERENCES peca(id_peca) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
+*

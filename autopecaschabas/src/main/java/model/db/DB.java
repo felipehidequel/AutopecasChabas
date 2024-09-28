@@ -7,7 +7,12 @@ import java.sql.SQLException;
 public class DB {
     public static Connection getConnection() throws SQLException {
         try {
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/autopecas", "postgres", "felipe421");
+            var jdbcUrl = DatabaseConfig.getDbUrl();
+            var username = DatabaseConfig.getDbUsername();
+            var password = DatabaseConfig.getDbPassword();
+
+
+            return DriverManager.getConnection(jdbcUrl, username, password);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             return null;
