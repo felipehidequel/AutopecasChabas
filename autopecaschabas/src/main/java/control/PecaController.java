@@ -1,5 +1,5 @@
 package control;
 
-public class PecaController {   
+public class PecaController {
 
 }
