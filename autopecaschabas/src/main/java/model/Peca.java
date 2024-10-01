@@ -8,7 +8,7 @@ public class Peca {
     private double preco;
     private int quantidadeEstoque;
 
-    public Peca(int idPeca, String nome, String categoria,String fabricante, double preco, int quantidadeEstoque) {
+    public Peca(int idPeca, String nome, String categoria, String fabricante, double preco, int quantidadeEstoque) {
         this.idPeca = idPeca;
         this.nome = nome;
         this.categoria = categoria;
@@ -28,6 +28,7 @@ public class Peca {
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -43,6 +44,7 @@ public class Peca {
     public String getFabricante() {
         return fabricante;
     }
+
     public void setFabricante(String fabricante) {
         this.fabricante = fabricante;
     }

@@ -9,6 +9,7 @@ public class Pessoa{
         this.nome = nome;
     }
 
+
     public int getId(){
         return (id);
     } 
@@ -16,16 +17,16 @@ public class Pessoa{
         this.id = id;
     }
 
-    public String getNome(){
+    public String getNome() {
         return (nome);
     }
-    public void setNome(String nome){
+
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-
     @Override
-    public String toString(){
+    public String toString() {
         return "Nome: " + nome + "\n" + "ID: " + id + "\n";
     }
 

@@ -12,33 +12,32 @@ public class Funcionario extends Pessoa{
         this.gerente = gerente;
     }
 
-    public String getLogin(){
+    public String getLogin() {
         return (login);
     }
 
-    public void setLogin(String login){
+    public void setLogin(String login) {
         this.login = login;
     }
 
-    public String getSenha(){
+    public String getSenha() {
         return (senha);
     }
-
+  
     public void setSenha(String senha){
-        this.login = login;
+        this.senha = senha;
     }
 
-    public boolean getGerente(){
+    public boolean getGerente() {
         return gerente;
     }
 
-    public void setGerente(Boolean gerente){
+    public void setGerente(Boolean gerente) {
         this.gerente = gerente;
     }
 
     @Override
-    public String toString(){
-        return "";
+    public String toString() {
+        return super.toString() + " ," + login + ", " + senha + ", " + gerente;
     }
-
 }
