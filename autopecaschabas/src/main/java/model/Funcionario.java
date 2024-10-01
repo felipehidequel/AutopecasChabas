@@ -1,11 +1,11 @@
 package model;
 
-class Funcionario extends Pessoa{
+public class Funcionario extends Pessoa{
     private String login;
     private String senha;
     private Boolean gerente;
 
-    public Funcionario(String id, String nome, String login, String senha, Boolean gerente){
+    public Funcionario(int id, String nome, String login, String senha, Boolean gerente){
         super(id, nome);
         this.login = login;
         this.senha = senha;

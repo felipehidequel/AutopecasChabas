@@ -1,11 +1,10 @@
 package model;
 
-class Cliente extends Pessoa{
+public class Cliente extends Pessoa{
     private String telefone;
     private String cpf;
-    private String nome;
 
-    public Cliente(String id, String nome, String telefone, String cpf){
+    public Cliente(int id, String nome, String telefone, String cpf){
         super(id, nome);
         this.telefone = telefone;
         this.cpf = cpf;
@@ -18,11 +17,12 @@ class Cliente extends Pessoa{
         this.telefone = telefone;
     }
 
-    public String getNome(){
-        return (this.nome);
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
-    public void setNome(String nome){
-        this.nome = nome;
+
+    public String getCpf() {
+        return cpf;
     }
 
     @Override

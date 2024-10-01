@@ -1,18 +1,18 @@
 package model;
 
 public class Pessoa{
-    private String id;
+    private int id;
     private String nome;
 
-    public Pessoa(String id, String nome){
+    public Pessoa(int id, String nome){
         this.id = id;
         this.nome = nome;
     }
 
-    public String getId(){
+    public int getId(){
         return (id);
     } 
-    public void setId(String id){
+    public void setId(int id){
         this.id = id;
     }
 
