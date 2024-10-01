@@ -7,7 +7,7 @@ public class NotaPedido {
     private Pedido pedido;
     private double valorTotal;
 
-    public NotaPedido (int idNotaPedido, int qntdPeca, Peca peca, Pedido pedido, double valor){
+    public NotaPedido(int idNotaPedido, int qntdPeca, Peca peca, Pedido pedido, double valor) {
         this.idNotaPedido = idNotaPedido;
         this.peca = peca;
         this.pedido = pedido;
@@ -15,47 +15,47 @@ public class NotaPedido {
         this.valorTotal = valor;
     }
 
-    public int getIdNotaPedido(){
+    public int getIdNotaPedido() {
         return idNotaPedido;
     }
 
-    public int getQntPeca(){
+    public int getQntPeca() {
         return quantidadePeca;
     }
 
-    public Peca getPeca(){
+    public Peca getPeca() {
         return peca;
     }
 
-    public Pedido getPedido(){
+    public Pedido getPedido() {
         return pedido;
     }
 
-    public double getValorTotal(){
+    public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setIdNotaPedido(int idNotaPedido){
+    public void setIdNotaPedido(int idNotaPedido) {
         this.idNotaPedido = idNotaPedido;
     }
 
-    public void setQntPeca(int quantidadePeca){
+    public void setQntPeca(int quantidadePeca) {
         this.quantidadePeca = quantidadePeca;
     }
 
-    public void setPeca(Peca peca){
+    public void setPeca(Peca peca) {
         this.peca = peca;
     }
 
-    public void setPedido(Pedido pedido){
+    public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
 
-    public void setValorTotal(double valorTotal){
+    public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
 
-    public String toString(){
+    public String toString() {
         return "ID NOTA: " + idNotaPedido + "\n" + "Pedido: " + "\t" + pedido + "\t" + quantidadePeca + "\n" + "Valor Total: " + "\t" + valorTotal + "\n";
     }
 }
