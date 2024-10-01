@@ -7,12 +7,12 @@ public class NotaPedido {
     private Pedido pedido;
     private double valorTotal;
 
-    public NotaPedido (int idNotaPedido, int qntdPeca, Peca peca, Pedido pedido, double valor){
+    public NotaPedido (int idNotaPedido, int quantidadePeca, Peca peca, Pedido pedido, double valorTotal){
         this.idNotaPedido = idNotaPedido;
         this.peca = peca;
         this.pedido = pedido;
-        this.quantidadePeca = qntdPeca;
-        this.valorTotal = valor;
+        this.quantidadePeca = quantidadePeca;
+        this.valorTotal = valorTotal;
     }
 
     public int getIdNotaPedido(){
