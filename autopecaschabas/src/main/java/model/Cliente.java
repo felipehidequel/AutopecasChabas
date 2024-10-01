@@ -18,6 +18,14 @@ class Cliente extends Pessoa {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+    
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
     public String getNome() {
         return (this.nome);
@@ -31,5 +39,4 @@ class Cliente extends Pessoa {
     public String toString() {
         return "";
     }
-
 }

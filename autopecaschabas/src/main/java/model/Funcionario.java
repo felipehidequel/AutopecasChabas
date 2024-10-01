@@ -23,9 +23,9 @@ class Funcionario extends Pessoa {
     public String getSenha() {
         return (senha);
     }
-
-    public void setSenha(String senha) {
-        this.login = login;
+  
+    public void setSenha(String senha){
+        this.senha = senha;
     }
 
     public boolean getGerente() {
@@ -40,5 +40,4 @@ class Funcionario extends Pessoa {
     public String toString() {
         return "";
     }
-
 }

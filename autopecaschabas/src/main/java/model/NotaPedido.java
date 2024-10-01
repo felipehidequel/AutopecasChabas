@@ -1,5 +1,6 @@
 package model;
-
+import model.Peca;
+import model.Pedido;
 public class NotaPedido {
     private int idNotaPedido;
     private int quantidadePeca;
