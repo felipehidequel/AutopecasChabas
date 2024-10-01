@@ -63,16 +63,6 @@ public class ClienteDAO {
         }
     }
 
-        public static void excluirPeca(Peca peca) {
-        var sql = "DELETE FROM peca WHERE id_peca = ?;";
-        try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, peca.getIdPeca());
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     public static Cliente buscarCliente(String nome){
         var sql = "SELECT id_cliente,nome,telefone,cpf from cliente WHERE nome = ?;";
 
