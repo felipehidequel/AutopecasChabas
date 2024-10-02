@@ -85,6 +85,29 @@ public class FuncionarioDAO {
         return null;
     }
 
+    public static Funcionario buscarFuncionarioById (int id){
+        var sql = "SELECT * FROM funcionario WHERE id_func = ?;";
+        try(var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, id);
+            var rs = pstmt.executeQuery();
+            if(rs.next()){
+                int idf = rs.getInt("id_func");
+                String nomeF = rs.getString("nome");
+                String login = rs.getString("login");
+                String senha = rs.getString("senha");
+                Boolean gerente = rs.getBoolean("gerente");
+                Funcionario f = new Funcionario(nomeF, login, senha, gerente);
+                f.setId(idf);
+                return f;
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+
+
     
     public static List<Funcionario> listaFuncionarios() {
         List<Funcionario> funcionarios = new ArrayList<>();

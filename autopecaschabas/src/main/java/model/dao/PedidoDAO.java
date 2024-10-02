@@ -2,39 +2,122 @@ package model.dao;
 
 import model.Pedido;
 import model.db.DB;
+import model.Funcionario;
+import model.Cliente;
 
 import java.sql.*;
-import java.util.Calendar;
-
-//CREATE TABLE pedido (
-//        id_pedido SERIAL PRIMARY KEY,
-//        data_pedido DATE NOT NULL,
-//        status VARCHAR(10) NOT NULL,
-//id_func INT NOT NULL,
-//id_cliente INT NOT NULL,
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class PedidoDAO {
 
-    public static Pedido buscarPedidoById(int idPedido){
-        Pedido pedido = null;
-        var sql = "SELECT * FROM pedido WHERE id = ?";
-        try(var conn = DB.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    public static void criaPedido(Pedido pedido) {
+        var sql = "INSERT INTO pedido(data_pedido, status, id_func, id_cliente) VALUES (?,?,?,?);";
+        try (var conn = DB.getConnection(); 
+             var pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             
+            pstmt.setDate(1, new java.sql.Date(pedido.getData().getTime()));
+            pstmt.setString(2, pedido.getStatus());
+            pstmt.setInt(3, pedido.getFuncionario().getId());
+            pstmt.setInt(4, pedido.getCliente().getId());
+
+            int insertedRow = pstmt.executeUpdate();
+            if (insertedRow > 0) {
+                try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        pedido.setIdPedido(generatedKeys.getInt(1));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void editaPedido(Pedido pedido) {
+        var sql = "UPDATE pedido SET data_pedido = ?, status = ?, id_func = ?, id_cliente = ? WHERE id_pedido = ?;";
+        try (var conn = DB.getConnection(); 
+             var pstmt = conn.prepareStatement(sql)){
+        
+            pstmt.setDate(1, new java.sql.Date(pedido.getData().getTime()));
+            pstmt.setString(2, pedido.getStatus());
+            pstmt.setInt(3, pedido.getFuncionario().getId());
+            pstmt.setInt(4, pedido.getCliente().getId());
+            pstmt.setInt(5, pedido.getIdPedido());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void excluirPedido(Pedido pedido) {
+        var sql = "DELETE FROM pedido WHERE id_pedido = ?;";
+        try (var conn = DB.getConnection(); 
+             var pstmt = conn.prepareStatement(sql)) {
+             
+            pstmt.setInt(1, pedido.getIdPedido());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static List<Pedido> listarPedido() {
+        List<Pedido> pedidos = new ArrayList<>();
+        var sql = "SELECT id_pedido, data_pedido, status, id_func, id_cliente FROM pedido;";
+        try (var conn = DB.getConnection(); 
+             var pstmt = conn.prepareStatement(sql)) {
+             
+            var rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id_pedido");
+                Date data = rs.getDate("data_pedido");
+                String status = rs.getString("status");
+                Funcionario funcionario = FuncionarioDAO.buscarFuncionarioById(rs.getInt("id_func"));
+                Cliente cliente = ClienteDAO.buscarClienteById(rs.getInt("id_cliente"));
+
+                pedidos.add(new Pedido(id, data, status, funcionario, cliente));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return pedidos;
+    }
+
+    public static void editarStatus(int idPedido, String novoStatus) {
+        var sql = "UPDATE pedido SET status = ? WHERE id_pedido = ?;";
+        try (var conn = DB.getConnection(); 
+             var pstmt = conn.prepareStatement(sql)) {
+             
+            pstmt.setString(1, novoStatus);
+            pstmt.setInt(2, idPedido);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static Pedido buscarPedidoById(int idPedido) {
+        var sql = "SELECT * FROM pedido WHERE id_pedido = ?;";
+        try (var conn = DB.getConnection(); 
+             var pstmt = conn.prepareStatement(sql)) {
+             
             pstmt.setInt(1, idPedido);
             ResultSet rs = pstmt.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 int id = rs.getInt("id_pedido");
-                int idCliente = rs.getInt("id_cliente");
-                int idFuncionario = rs.getInt("id_func");
                 Date data = rs.getDate("data_pedido");
+                String status = rs.getString("status");
+                Funcionario funcionario = FuncionarioDAO.buscarFuncionarioById(rs.getInt("id_func"));
+                Cliente cliente = ClienteDAO.buscarClienteById(rs.getInt("id_cliente"));
 
+                return new Pedido(id, data, status, funcionario, cliente);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
-
-        return  null;
+        return null;
     }
-    
 }

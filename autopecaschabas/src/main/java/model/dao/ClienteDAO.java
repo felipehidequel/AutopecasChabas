@@ -2,6 +2,7 @@ package model.dao;
 
 import model.db.DB;
 import model.Cliente;
+import model.Funcionario;
 import model.Peca;
 
 import java.sql.*;
@@ -93,6 +94,26 @@ public class ClienteDAO {
         return null;
     }
 
+    public static Cliente buscarClienteById (int id){
+        var sql = "SELECT * FROM cliente WHERE id_cliente = ?;";
+        try(var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)){
+            pstmt.setInt(1, id);
+            var rs = pstmt.executeQuery();
+            if(rs.next()){
+                int idc = rs.getInt("id_cliente");
+                String nomec = rs.getString("nome");
+                String telefone = rs.getString("telefone");
+                String cpf = rs.getString("cpf");
+
+                Cliente c = new Cliente(nomec, telefone, cpf);
+                c.setId(idc);
+                return c;
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
     
     public static List<Cliente> listaClientes(){
         List<Cliente> clientes = new ArrayList<Cliente>();
