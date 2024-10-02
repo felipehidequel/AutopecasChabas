@@ -36,3 +36,12 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Properties ###
+*.properties
+
+### mvn ###
+.mvn/
+
+### idea ###
+.idea/
