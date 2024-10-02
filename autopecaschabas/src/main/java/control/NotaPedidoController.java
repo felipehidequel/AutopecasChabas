@@ -24,7 +24,7 @@ public class NotaPedidoController {
         return NotaPedidoDAO.buscarNotaPedidos();
     }
 
-    public static NotaPedido(Pedido id_pedido){
+    public static buscarNotaPedido(Pedido id_pedido){
         return NotaPedidoDAO.buscarNotaPedido(id_pedido);
     }
 
