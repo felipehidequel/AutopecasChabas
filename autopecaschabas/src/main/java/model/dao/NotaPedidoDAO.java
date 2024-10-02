@@ -59,7 +59,7 @@ public class NotaPedidoDAO {
         }
     }
 
-    public static NotaPedido visualizarNotaPedido(NotaPedido nota_pedido) {
+    public static NotaPedido buscarNotaPedido(NotaPedido nota_pedido) {
         var sql = "SELECT id_nota AS id, quantidade_peca AS qntd, id_peca, id_pedido, valor_total AS valor FROM nota_pedido WHERE id_pedido = ?";
         try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)){
             pstmt.setInt(4, nota_pedido.getPedido().getIdPedido());
@@ -80,7 +80,7 @@ public class NotaPedidoDAO {
         return null;
     }
 
-    public static List<NotaPedido> listaNotasPedidos() {
+    public static List<NotaPedido> listarNotasPedidos() {
         List<NotaPedido> notaPedidos = new ArrayList<>();
         var sql = "SELECT id_nota AS id, quantidade_peca AS qntd, id_peca, id_pedido, valor_total AS valor FROM nota_pedido;";
         try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)) {
