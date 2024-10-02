@@ -29,6 +29,12 @@ public class ClienteDAO {
             pstmt.setString(2, telefone);
             pstmt.setString(3, cpf);
             pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                cliente.setId(rs.getInt(1));
+            }
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -63,20 +69,21 @@ public class ClienteDAO {
         }
     }
 
-    public static Cliente buscarCliente(String nome){
-        var sql = "SELECT id_cliente,nome,telefone,cpf from cliente WHERE nome = ?;";
+    public static Cliente buscarClienteByCpf(String cpf){
+        var sql = "SELECT id_cliente,nome,telefone,cpf from cliente WHERE cpf = ?;";
 
         try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)){
-            pstmt.setString(1, nome);
+            pstmt.setString(1, cpf);
             var rs = pstmt.executeQuery();
 
             if(rs.next()){
                 int id = rs.getInt("id_cliente");
-                String nome_cliente = rs.getString("nome");
+                String nomeCliente = rs.getString("nome");
                 String telefone = rs.getString("telefone");
-                String cpf = rs.getString("cpf");
-
-                return new Cliente(id, nome_cliente, telefone, cpf);
+                String cpfAchado = rs.getString("cpf");
+                var c = new Cliente(nomeCliente, telefone, cpfAchado);
+                c.setId(id);
+                return c;
 
             }
         } catch (SQLException e) {
@@ -96,11 +103,14 @@ public class ClienteDAO {
             var rs = pstmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id_cliente");
-                String nome_cliente = rs.getString("nome");
+                String nomeCliente = rs.getString("nome");
                 String telefone = rs.getString("telefone");
                 String cpf = rs.getString("cpf");
 
-                clientes.add(new Cliente(id, nome_cliente, telefone, cpf));
+                var c = new Cliente(nomeCliente, telefone, cpf);
+                c.setId(id);
+
+                clientes.add(c);
             }
             return clientes;
         } catch (SQLException e) {

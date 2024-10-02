@@ -5,8 +5,8 @@ public class Funcionario extends Pessoa{
     private String senha;
     private Boolean gerente;
 
-    public Funcionario(int id, String nome, String login, String senha, Boolean gerente){
-        super(id, nome);
+    public Funcionario(String nome, String login, String senha, Boolean gerente){
+        super(nome);
         this.login = login;
         this.senha = senha;
         this.gerente = gerente;

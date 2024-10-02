@@ -4,9 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Cliente;
 import model.Funcionario;
-import model.Peca;
 import model.db.DB;
 
 // CREATE TABLE funcionario (
@@ -79,7 +77,7 @@ public class FuncionarioDAO {
                 String senha = rs.getString("senha");
                 Boolean gerente = rs.getBoolean("gerente");
 
-                return new Funcionario(id, nome_func, login, senha, gerente);
+                return new Funcionario(nome_func, login, senha, gerente);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -100,7 +98,7 @@ public class FuncionarioDAO {
                 String senha = rs.getString("senha");
                 Boolean gerente = rs.getBoolean("gerente");
 
-                funcionarios.add(new Funcionario(id, nome, login, senha, gerente));
+                funcionarios.add(new Funcionario(nome, login, senha, gerente));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
