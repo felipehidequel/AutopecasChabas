@@ -77,6 +77,29 @@ public class PecaDAO {
         return null;
     }
 
+    public static Peca buscarPecaById(int idPeca){
+        var sql = "SELECT id_peca AS id, nome, categoria, fabricante, preco, quantidade_estoque AS qtd FROM peca WHERE id = ?;";
+        try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idPeca);
+            var rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String categoria = rs.getString("categoria");
+                String fabricante = rs.getString("fabricante");
+                double preco = rs.getDouble("preco");
+                int quantidadeEstoque = rs.getInt("qtd");
+
+                return new Peca(id, nome, categoria, fabricante, preco, quantidadeEstoque);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+
     public static List<Peca> listaPecas() {
         List<Peca> pecas = new ArrayList<>();
         var sql = "SELECT id_peca AS id, nome, categoria, fabricante, preco, quantidade_estoque AS qtd FROM peca;";

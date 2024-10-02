@@ -1,18 +1,19 @@
 package model;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import model.Funcionario;
 
 public class Pedido {
 
     private int idPedido;
-    private Calendar data;
+    private Date data;
     private String status;
     private Funcionario funcionario;
     private Cliente cliente;
 
-    public Pedido(int idPedido, Calendar data, String status, Funcionario funcionario, Cliente cliente) {
+    public Pedido(int idPedido, Date data, String status, Funcionario funcionario, Cliente cliente) {
         this.idPedido = idPedido;
         this.data = data;
         this.status = status;
@@ -28,11 +29,11 @@ public class Pedido {
         this.idPedido = idPedido;
     }
 
-    public Calendar getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Calendar data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
