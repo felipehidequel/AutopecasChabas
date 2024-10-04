@@ -34,11 +34,15 @@ public class TestFuncionarioDAO implements TestDaoComponent {
             System.out.println("Funcionario atualizado!");
 
             System.out.println("Buscando funcionario por nome:");
-            func = FuncionarioDAO.buscaFuncionario("Doutor Gerente");
+            func = FuncionarioDAO.buscaFuncionario(func.getNome());
             System.out.println("Funcionario encontrando");
 
             System.out.println("Buscando funcionario por id:");
-            FuncionarioDAO.buscarFuncionarioById(1);
+            FuncionarioDAO.buscarFuncionarioById(func.getId());
+            System.out.println("Funcionario encontrando");
+
+            System.out.println("Buscando funcionario por login:");
+            FuncionarioDAO.buscaFuncionarioByLogin(func.getLogin());
             System.out.println("Funcionario encontrando");
 
             System.out.println("Funcionarios:");

@@ -95,8 +95,35 @@ public class FuncionarioDAO {
                     String login = rs.getString("login");
                     String senha = rs.getString("senha");
                     Boolean gerente = rs.getBoolean("gerente");
+                    Funcionario f = new Funcionario(nome_func, login, senha, gerente);
+                    f.setId(id);
+                    return f;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 
-                    return new Funcionario(nome_func, login, senha, gerente);
+    public static Funcionario buscaFuncionarioByLogin(String login){
+        var sql = "SELECT id_func AS id, nome, login, senha, gerente FROM funcionario WHERE login = ?;";
+        try (var conn = DB.getConnection()) {
+            assert conn != null;
+            try (var pstmt = conn.prepareStatement(sql)){
+                pstmt.setString(1, login);
+                var rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String nome_func = rs.getString("nome");
+                    String loginF = rs.getString("login");
+                    String senha = rs.getString("senha");
+                    Boolean gerente = rs.getBoolean("gerente");
+
+                    Funcionario f = new Funcionario(nome_func, loginF, senha, gerente);
+                    f.setId(id);
+                    return f;
                 }
             }
         } catch (SQLException e) {
