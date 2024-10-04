@@ -16,12 +16,12 @@ public class PedidoController {
     }
 
     public static Pedido editarPedido(int idPedido, Date data, String status, Funcionario funcionario, Cliente cliente){
-        var p = new Pedido(idPedido, data, status, funcionario, cliente)
+        var p = new Pedido(idPedido, data, status, funcionario, cliente);
         PedidoDAO.editaPedido(p);
         return p;
     }
 
-    public static Pedido excluirPedido(int id_pedido){
+    public static boolean excluirPedido(int id_pedido){
         Pedido pedido = PedidoDAO.buscarPedidoById(id_pedido);
         if(pedido == null){
             return false;
@@ -31,10 +31,10 @@ public class PedidoController {
     }
 
     public static List<Pedido> listarPedidos(){
-        return PedidoDAO.buscarPedidoById();
+        return PedidoDAO.listarPedido();
     }
 
-    public static buscarPedido(int id_pedido){
+    public static Pedido buscarPedido(int id_pedido){
         return PedidoDAO.buscarPedidoById(id_pedido);
     }
 }

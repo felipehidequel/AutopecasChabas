@@ -27,7 +27,7 @@ public class Pessoa{
 
     @Override
     public String toString() {
-        return "Nome: " + nome + "\n" + "ID: " + id + "\n";
+        return "Nome: " + nome + " " + "ID: " + id + " ";
     }
 
 }

@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +24,23 @@ public class FuncionarioDAO {
         Boolean gerente = funcionario.getGerente();
 
 
-        var sql = "INSET INTO funcionario(nome, login, senha, gerente) VALUES (?,?,?, ?);";
-        try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, nome);
-            pstmt.setString(2, login);
-            pstmt.setString(3, senha);
-            pstmt.setBoolean(4, gerente);
-            pstmt.executeUpdate();
+        var sql = "INSERT INTO funcionario(nome, login, senha, gerente) VALUES (?,?,?, ?);";
+        try (var conn = DB.getConnection();) {
+            assert conn != null;
+            try (var pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                pstmt.setString(1, nome);
+                pstmt.setString(2, login);
+                pstmt.setString(3, senha);
+                pstmt.setBoolean(4, gerente);
+                pstmt.executeUpdate();
+
+                var rs = pstmt.getGeneratedKeys();
+
+                if (rs.next()){
+                    funcionario.setId(rs.getInt("id_func"));
+                }
+
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -43,12 +54,15 @@ public class FuncionarioDAO {
         Boolean gerente = funcionario.getGerente();
 
         var sql = "UPDATE funcionario SET nome = ?, login = ?, senha = ?, gerente = ?;";
-        try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, nome);
-            pstmt.setString(2, login);
-            pstmt.setString(3, senha);
-            pstmt.setBoolean(4, gerente);
-            pstmt.executeUpdate();
+        try (var conn = DB.getConnection()) {
+            assert conn != null;
+            try (var pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, nome);
+                pstmt.setString(2, login);
+                pstmt.setString(3, senha);
+                pstmt.setBoolean(4, gerente);
+                pstmt.executeUpdate();
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -56,9 +70,12 @@ public class FuncionarioDAO {
 
     public static void excluirFuncionario(Funcionario funcionario) {
         var sql = "DELETE FROM funcionario WHERE id_func = ?;";
-        try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, funcionario.getId());
-            pstmt.executeUpdate();
+        try (var conn = DB.getConnection()) {
+            assert conn != null;
+            try (var pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, funcionario.getId());
+                pstmt.executeUpdate();
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -66,18 +83,21 @@ public class FuncionarioDAO {
 
     public static Funcionario buscaFuncionario(String nome){
         var sql = "SELECT id_func AS id, nome, login, senha, gerente FROM funcionario WHERE nome = ?;";
-        try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)){
-            pstmt.setString(1, nome);
-            var rs = pstmt.executeQuery();
+        try (var conn = DB.getConnection()) {
+            assert conn != null;
+            try (var pstmt = conn.prepareStatement(sql)){
+                pstmt.setString(1, nome);
+                var rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                String nome_func = rs.getString("nome");
-                String login = rs.getString("login");
-                String senha = rs.getString("senha");
-                Boolean gerente = rs.getBoolean("gerente");
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String nome_func = rs.getString("nome");
+                    String login = rs.getString("login");
+                    String senha = rs.getString("senha");
+                    Boolean gerente = rs.getBoolean("gerente");
 
-                return new Funcionario(nome_func, login, senha, gerente);
+                    return new Funcionario(nome_func, login, senha, gerente);
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -87,18 +107,21 @@ public class FuncionarioDAO {
 
     public static Funcionario buscarFuncionarioById (int id){
         var sql = "SELECT * FROM funcionario WHERE id_func = ?;";
-        try(var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)){
-            pstmt.setInt(1, id);
-            var rs = pstmt.executeQuery();
-            if(rs.next()){
-                int idf = rs.getInt("id_func");
-                String nomeF = rs.getString("nome");
-                String login = rs.getString("login");
-                String senha = rs.getString("senha");
-                Boolean gerente = rs.getBoolean("gerente");
-                Funcionario f = new Funcionario(nomeF, login, senha, gerente);
-                f.setId(idf);
-                return f;
+        try(var conn = DB.getConnection()) {
+            assert conn != null;
+            try(var pstmt = conn.prepareStatement(sql)){
+                pstmt.setInt(1, id);
+                var rs = pstmt.executeQuery();
+                if(rs.next()){
+                    int idf = rs.getInt("id_func");
+                    String nomeF = rs.getString("nome");
+                    String login = rs.getString("login");
+                    String senha = rs.getString("senha");
+                    Boolean gerente = rs.getBoolean("gerente");
+                    Funcionario f = new Funcionario(nomeF, login, senha, gerente);
+                    f.setId(idf);
+                    return f;
+                }
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -112,16 +135,20 @@ public class FuncionarioDAO {
     public static List<Funcionario> listaFuncionarios() {
         List<Funcionario> funcionarios = new ArrayList<>();
         var sql = "SELECT id_func AS id, nome, login, senha, gerente FROM funcionario;";
-        try (var conn = DB.getConnection(); var pstmt = conn.prepareStatement(sql)) {
-            var rs = pstmt.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                String login = rs.getString("login");
-                String senha = rs.getString("senha");
-                Boolean gerente = rs.getBoolean("gerente");
-
-                funcionarios.add(new Funcionario(nome, login, senha, gerente));
+        try (var conn = DB.getConnection()) {
+            assert conn != null;
+            try (var pstmt = conn.prepareStatement(sql)) {
+                var rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String nome = rs.getString("nome");
+                    String login = rs.getString("login");
+                    String senha = rs.getString("senha");
+                    Boolean gerente = rs.getBoolean("gerente");
+                    Funcionario f = new Funcionario(nome, login, senha, gerente);
+                    f.setId(id);
+                    funcionarios.add(f);
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

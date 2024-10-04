@@ -38,6 +38,6 @@ public class Funcionario extends Pessoa{
 
     @Override
     public String toString() {
-        return super.toString() + " ," + login + ", " + senha + ", " + gerente;
+        return super.toString() + " Login: " + login + " Senha: " + senha + " Cargo: " + (gerente?"gerente":"atendente");
     }
 }

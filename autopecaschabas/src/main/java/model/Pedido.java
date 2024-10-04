@@ -67,8 +67,8 @@ public class Pedido {
                 "idPedido=" + idPedido +
                 ", data=" + data +
                 ", status='" + status + '\'' +
-                ", funcionario=" + funcionario +
-                ", cliente=" + cliente +
+                ", funcionario=" + funcionario.getNome() +
+                ", cliente=" + cliente.getCpf() +
                 '}';
     }
 }
