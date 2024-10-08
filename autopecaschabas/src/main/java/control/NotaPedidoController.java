@@ -8,7 +8,19 @@ import model.Pedido;
 import model.dao.NotaPedidoDAO;
 
 public class NotaPedidoController {
-    public static NotaPedido criaNotaPedido(int idNotaPedido, int qntdPeca, Peca peca, Pedido pedido, double valorTotal){
+    public static NotaPedido criaNotaPedido(int idNotaPedido, int qntdPeca, Peca peca, Pedido pedido){
+        if (qntdPeca < 0) {
+            throw new IllegalArgumentException("A quantidade de peças não pode ser negativa.");
+        }
+
+        if (peca == null) {
+            throw new IllegalArgumentException("A peça não pode ser nula ou vazia.");
+        }
+
+        if (pedido == null) {
+            throw new IllegalArgumentException("O pedido não pode ser nulo ou vazio.");
+        }
+
         NotaPedido nota = new NotaPedido(idNotaPedido, qntdPeca, peca, pedido);
         NotaPedidoDAO.criaNotaPedido(nota);
         return nota;
