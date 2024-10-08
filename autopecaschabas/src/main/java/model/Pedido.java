@@ -1,9 +1,6 @@
 package model;
 
-import java.util.Calendar;
 import java.util.Date;
-
-import model.Funcionario;
 
 public class Pedido {
 
@@ -12,6 +9,11 @@ public class Pedido {
     private String status;
     private Funcionario funcionario;
     private Cliente cliente;
+
+    public static final String andamento = "EM ANDAMENTO";
+    public static final String completo = "COMPLETO";
+    public static final String problema = "CANCELADO";
+    public static final String processando = "EM PROCESSAMENTO";
 
     public Pedido(int idPedido, Date data, String status, Funcionario funcionario, Cliente cliente) {
         this.idPedido = idPedido;
