@@ -7,20 +7,30 @@ import model.dao.FuncionarioDAO;
 
 public class FuncionarioController {
     public static void criaFuncionario(String nome, String login, String senha, boolean gerente) {
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome não pode ser nulo.\n");
         }
         nome = nome.toUpperCase();
 
-        if (login == null || login.trim().isEmpty()) {
-            throw new IllegalArgumentException("Login não pode ser nulo ou vazio.");
+        if (nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser vazio.");
         }
+        nome = nome.toUpperCase();
+
+        if (login == null) {
+            throw new IllegalArgumentException("Login não pode ser nulo.\n");
+        }
+
+        if (login.trim().isEmpty()) {
+            throw new IllegalArgumentException("Login não pode ser vazio.\n");
+        }
+
         if (!login.matches("[a-zA-Z0-9]+")) {
-            throw new IllegalArgumentException("Login deve conter apenas letras e números.");
+            throw new IllegalArgumentException("Login deve conter apenas letras e números.\n");
         }
 
         if (senha == null || senha.length() < 8) {
-            throw new IllegalArgumentException("A senha deve ter no mínimo 6 caracteres.");
+            throw new IllegalArgumentException("A senha deve ter no mínimo 6 caracteres.\n");
         }
         if (!senha.matches(".*[A-Za-z].*") || !senha.matches(".*[0-9].*")) {
             throw new IllegalArgumentException("A senha deve conter pelo menos uma letra e um número.");
