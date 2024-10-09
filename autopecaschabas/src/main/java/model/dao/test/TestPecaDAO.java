@@ -29,7 +29,7 @@ public class TestPecaDAO implements TestDaoComponent {
 
             // Buscando uma peça por nome
             System.out.println("Peça buscada por nome:");
-            peca = PecaDAO.vizualizarPeca("Pneu de moto");
+            peca = PecaDAO.listarPeca("Pneu de moto");
             System.out.println(peca);
 
             // Excluindo a peça

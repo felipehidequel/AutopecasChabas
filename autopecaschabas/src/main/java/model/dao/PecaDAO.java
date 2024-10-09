@@ -64,7 +64,7 @@ public class PecaDAO {
         }
     }
 
-    public static Peca vizualizarPeca(String nomePeca) {
+    public static Peca listarPeca(String nomePeca) {
         var sql = "SELECT id_peca AS id, nome, categoria, fabricante, preco, quantidade_estoque AS qtd FROM peca WHERE nome = ?;";
         try (var conn = DB.getConnection()) {
             assert conn != null;
