@@ -114,7 +114,7 @@ public class FuncionarioController {
     public static List<Funcionario> listarFuncionarios() {
         return FuncionarioDAO.listaFuncionarios();
     }
-    
+
     public static boolean realizarLogin(String login, String senha){
         if (login == null || login.trim().isEmpty()) {
             throw new IllegalArgumentException("Login não pode ser nulo ou vazio.");
@@ -126,7 +126,7 @@ public class FuncionarioController {
 
         Funcionario funcionario = FuncionarioDAO.buscaFuncionarioByLogin(login);
         if (funcionario == null) {
-            throw new IllegalArgumentException("Funcionário não encontrado.");
+            return false;
         }
 
         return funcionario.getSenha().equals(senha);
