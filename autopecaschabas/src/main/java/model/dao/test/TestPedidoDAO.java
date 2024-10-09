@@ -29,7 +29,7 @@ public class TestPedidoDAO implements TestDaoComponent {
             if (pedidos.isEmpty())
                 pedido = new Pedido(0, new Date(), "Pago", func, cliente);
             else {
-                pedido = pedidos.getFirst();
+                pedido = pedidos.get(0);
             }
 
             PedidoDAO.criaPedido(pedido);

@@ -15,7 +15,7 @@ public class NotaPedidoController {
     }
 
     public static NotaPedido editarNotaPedido(int idNotaPedido, int qntdPeca, Peca peca, Pedido pedido, double valorTotal){
-        var notaPedido = new NotaPedido(idNotaPedido, qntdPeca, peca, pedido);
+        NotaPedido notaPedido = new NotaPedido(idNotaPedido, qntdPeca, peca, pedido);
         NotaPedidoDAO.editaNotaPedido(notaPedido);
         return notaPedido;
     }

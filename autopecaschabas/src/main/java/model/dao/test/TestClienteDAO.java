@@ -18,7 +18,7 @@ public class TestClienteDAO implements TestDaoComponent {
             if (lista.isEmpty())
                 cliente = new Cliente("Teste", "84996579714", "11111111111");
             else {
-                cliente = lista.getFirst();
+                cliente = lista.get(0);
             }
 
             System.out.println("Inserindo cliente no banco:");

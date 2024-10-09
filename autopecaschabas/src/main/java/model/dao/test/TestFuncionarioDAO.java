@@ -20,7 +20,7 @@ public class TestFuncionarioDAO implements TestDaoComponent {
                 func = new Funcionario("Gerente Doutor", "hehehe", "eusouocara10", true);
             }
             else {
-                func = funcs.getFirst();
+                func = funcs.get(0);
             }
 
             System.out.println("Adicionando novo funcionario no banco:");

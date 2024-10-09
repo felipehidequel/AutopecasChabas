@@ -13,7 +13,7 @@ public class ClienteController {
     }
 
     public static Cliente atualizarCliente(String nome, String telefone, String cpf) {
-        var cliente = new Cliente(nome, telefone, cpf);
+        Cliente cliente = new Cliente(nome, telefone, cpf);
         ClienteDAO.editaCliente(cliente);
         return cliente;
     }

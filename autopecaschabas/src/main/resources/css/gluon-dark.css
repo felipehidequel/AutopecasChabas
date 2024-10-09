@@ -1,0 +1,12 @@
+<Button fx:id="loginButton" layoutX="344.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleLoginAction" text="login" styleClass="amber-button"/>
+
+.amber-button {
+    -fx-background-color: #FFC107; /* Amber swatch color */
+    -fx-text-fill: white;
+}
+
+.amber-button:hover {
+    -fx-background-color: #FFB300; /* Slightly darker amber on hover */
+}
+
+

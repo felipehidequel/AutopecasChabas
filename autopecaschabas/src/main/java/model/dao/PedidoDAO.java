@@ -21,10 +21,10 @@ import java.util.List;
 public class PedidoDAO {
 
     public static void criaPedido(Pedido pedido) {
-        var sql = "INSERT INTO pedido(data_pedido, status, id_func, id_cliente) VALUES (?,?,?,?);";
-        try (var conn = DB.getConnection()) {
+        String sql = "INSERT INTO pedido(data_pedido, status, id_func, id_cliente) VALUES (?,?,?,?);";
+        try (Connection conn = DB.getConnection()) {
             assert conn != null;
-            try (var pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
                 pstmt.setDate(1, new java.sql.Date(pedido.getData().getTime()));
                 pstmt.setString(2, pedido.getStatus());
@@ -46,10 +46,10 @@ public class PedidoDAO {
     }
 
     public static void editaPedido(Pedido pedido) {
-        var sql = "UPDATE pedido SET data_pedido = ?, status = ?, id_func = ?, id_cliente = ? WHERE id_pedido = ?;";
-        try (var conn = DB.getConnection()) {
+        String sql = "UPDATE pedido SET data_pedido = ?, status = ?, id_func = ?, id_cliente = ? WHERE id_pedido = ?;";
+        try (Connection conn = DB.getConnection()) {
             assert conn != null;
-            try (var pstmt = conn.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                 pstmt.setDate(1, new java.sql.Date(pedido.getData().getTime()));
                 pstmt.setString(2, pedido.getStatus());
@@ -64,10 +64,10 @@ public class PedidoDAO {
     }
 
     public static void excluirPedido(Pedido pedido) {
-        var sql = "DELETE FROM pedido WHERE id_pedido = ?;";
-        try (var conn = DB.getConnection()) {
+        String sql = "DELETE FROM pedido WHERE id_pedido = ?;";
+        try (Connection conn = DB.getConnection()) {
             assert conn != null;
-            try (var pstmt = conn.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                 pstmt.setInt(1, pedido.getIdPedido());
                 pstmt.executeUpdate();
@@ -79,12 +79,12 @@ public class PedidoDAO {
 
     public static List<Pedido> listarPedido() {
         List<Pedido> pedidos = new ArrayList<>();
-        var sql = "SELECT id_pedido, data_pedido, status, id_func, id_cliente FROM pedido;";
-        try (var conn = DB.getConnection()) {
+        String sql = "SELECT id_pedido, data_pedido, status, id_func, id_cliente FROM pedido;";
+        try (Connection conn = DB.getConnection()) {
             assert conn != null;
-            try (var pstmt = conn.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-                var rs = pstmt.executeQuery();
+                ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     int id = rs.getInt("id_pedido");
                     Date data = rs.getDate("data_pedido");
@@ -102,10 +102,10 @@ public class PedidoDAO {
     }
 
     public static void editarStatus(int idPedido, String novoStatus) {
-        var sql = "UPDATE pedido SET status = ? WHERE id_pedido = ?;";
-        try (var conn = DB.getConnection()) {
+        String sql = "UPDATE pedido SET status = ? WHERE id_pedido = ?;";
+        try (Connection conn = DB.getConnection()) {
             assert conn != null;
-            try (var pstmt = conn.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                 pstmt.setString(1, novoStatus);
                 pstmt.setInt(2, idPedido);
@@ -117,10 +117,10 @@ public class PedidoDAO {
     }
 
     public static Pedido buscarPedidoById(int idPedido) {
-        var sql = "SELECT * FROM pedido WHERE id_pedido = ?;";
-        try (var conn = DB.getConnection()) {
+        String sql = "SELECT * FROM pedido WHERE id_pedido = ?;";
+        try (Connection conn = DB.getConnection()) {
             assert conn != null;
-            try (var pstmt = conn.prepareStatement(sql)) {
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
                 pstmt.setInt(1, idPedido);
                 ResultSet rs = pstmt.executeQuery();

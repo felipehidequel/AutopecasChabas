@@ -126,7 +126,7 @@ public class FuncionarioController {
 
         Funcionario funcionario = FuncionarioDAO.buscaFuncionarioByLogin(login);
         if (funcionario == null) {
-            throw new IllegalArgumentException("Funcionário não encontrado.");
+            return false;
         }
 
         return funcionario.getSenha().equals(senha);

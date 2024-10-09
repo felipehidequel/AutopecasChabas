@@ -31,7 +31,7 @@ public class TestNotaPedidoDAO implements TestDaoComponent {
             if (notas.isEmpty()) {
                 nota = new NotaPedido(0, 10, peca, pedido);
             } else {
-                nota = notas.getFirst();
+                nota = notas.get(0);
             }
 
             System.out.println("Criando NotaPedido no banco");
