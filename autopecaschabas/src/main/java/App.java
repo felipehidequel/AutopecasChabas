@@ -1,5 +1,6 @@
 import model.entity.Funcionario;
 import utils.Logg;
+import view.TelaGerente;
 import view.TelaLogin;
 
 public class App {
@@ -9,7 +10,7 @@ public class App {
         if (user != null) {
             Logg.info("Login bem sucedido!");
             if (user.getGerente()) {
-                System.out.println("Menu para o gerente"); // substituir por menu
+                TelaGerente.menuGerente(); // substituir por menu
             } else {
                 System.out.println("Menu para o funcionario comum"); // substituir por menu
             }
