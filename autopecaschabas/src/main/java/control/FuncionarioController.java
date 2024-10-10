@@ -2,7 +2,7 @@ package control;
 
 import java.util.List;
 
-import model.Funcionario;
+import model.entity.Funcionario;
 import model.dao.FuncionarioDAO;
 
 public class FuncionarioController {
@@ -36,7 +36,7 @@ public class FuncionarioController {
             throw new IllegalArgumentException("A senha deve conter pelo menos uma letra e um número.");
         }
 
-        if(FuncionarioDAO.buscaFuncionarioByLogin(login) != null)
+        if (FuncionarioDAO.buscaFuncionarioByLogin(login) != null)
             throw new IllegalArgumentException("Login já existente!");
 
         Funcionario novoFuncionario = new Funcionario(nome, login.toLowerCase(), senha, gerente);
@@ -125,7 +125,8 @@ public class FuncionarioController {
         return FuncionarioDAO.listaFuncionarios();
     }
 
-    public static boolean realizarLogin(String login, String senha){
+    /*Se a senha estiver errada retorne null, se o login estiver errado retorne null*/
+    public static Funcionario realizarLogin(String login, String senha) {
         if (login == null || login.trim().isEmpty()) {
             throw new IllegalArgumentException("Login não pode ser nulo ou vazio.");
         }
@@ -136,10 +137,12 @@ public class FuncionarioController {
 
         Funcionario funcionario = FuncionarioDAO.buscaFuncionarioByLogin(login);
         if (funcionario == null) {
-            return false;
+            return null;
         }
-
-        return funcionario.getSenha().equals(senha);
+        if (funcionario.getSenha().equals(senha)) {
+            return funcionario;
+        }
+        return null;
     }
 
 }

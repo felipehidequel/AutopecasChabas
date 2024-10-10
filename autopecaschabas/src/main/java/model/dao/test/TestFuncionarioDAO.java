@@ -1,6 +1,6 @@
 package model.dao.test;
 
-import model.Funcionario;
+import model.entity.Funcionario;
 import model.dao.FuncionarioDAO;
 
 import java.util.List;

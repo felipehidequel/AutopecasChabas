@@ -1,4 +1,4 @@
-package model;
+package model.entity;
 
 public class Cliente extends Pessoa {
     private String telefone;

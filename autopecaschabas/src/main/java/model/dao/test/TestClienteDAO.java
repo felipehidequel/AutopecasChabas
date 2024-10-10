@@ -1,6 +1,6 @@
 package model.dao.test;
 
-import model.Cliente;
+import model.entity.Cliente;
 import model.dao.ClienteDAO;
 
 import java.util.List;

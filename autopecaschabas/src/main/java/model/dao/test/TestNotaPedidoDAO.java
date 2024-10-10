@@ -1,7 +1,7 @@
 package model.dao.test;
 
-import model.*;
 import model.dao.*;
+import model.entity.*;
 
 import java.util.Date;
 import java.util.List;

@@ -1,9 +1,9 @@
 package model.dao;
 
-import model.Pedido;
+import model.entity.Pedido;
 import model.db.DB;
-import model.Funcionario;
-import model.Cliente;
+import model.entity.Funcionario;
+import model.entity.Cliente;
 
 import java.sql.*;
 import java.util.ArrayList;

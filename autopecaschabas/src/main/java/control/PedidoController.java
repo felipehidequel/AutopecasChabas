@@ -3,13 +3,13 @@ package control;
 import java.util.Date;
 import java.util.List;
 
-import model.Cliente;
-import model.Funcionario;
-import model.Pedido;
+import model.entity.Cliente;
+import model.entity.Funcionario;
+import model.entity.Pedido;
 import model.dao.PedidoDAO;
 
 public class PedidoController {
-    public static Pedido criaPedido(int idPedido, Date data, String status, Funcionario funcionario, Cliente cliente){
+    public static Pedido criaPedido(int idPedido, Date data, String status, Funcionario funcionario, Cliente cliente) {
         if (data == null) {
             throw new IllegalArgumentException("Data não pode ser nulo.\n");
         }
@@ -23,7 +23,7 @@ public class PedidoController {
             throw new IllegalArgumentException("Status do pedido não pode ser nulo.\n");
         }
 
-        if (!status.equals(Pedido.andamento) && !status.equals(Pedido.completo) && !status.equals(Pedido.problema) && !status.equals(Pedido.processando)){
+        if (!status.equals(Pedido.andamento) && !status.equals(Pedido.completo) && !status.equals(Pedido.problema) && !status.equals(Pedido.processando)) {
             throw new IllegalArgumentException("Status de pedido inválido.");
         }
 
@@ -40,26 +40,26 @@ public class PedidoController {
         return pedido;
     }
 
-    public static Pedido editarPedido(int idPedido, Date data, String status, Funcionario funcionario, Cliente cliente){
+    public static Pedido editarPedido(int idPedido, Date data, String status, Funcionario funcionario, Cliente cliente) {
         var p = new Pedido(idPedido, data, status, funcionario, cliente);
         PedidoDAO.editaPedido(p);
         return p;
     }
 
-    public static boolean excluirPedido(int id_pedido){
+    public static boolean excluirPedido(int id_pedido) {
         Pedido pedido = PedidoDAO.buscarPedidoById(id_pedido);
-        if(pedido == null){
+        if (pedido == null) {
             return false;
         }
         PedidoDAO.excluirPedido(pedido);
         return true;
     }
 
-    public static List<Pedido> listarPedidos(){
+    public static List<Pedido> listarPedidos() {
         return PedidoDAO.listarPedido();
     }
 
-    public static Pedido buscarPedido(int id_pedido){
+    public static Pedido buscarPedido(int id_pedido) {
         return PedidoDAO.buscarPedidoById(id_pedido);
     }
 }

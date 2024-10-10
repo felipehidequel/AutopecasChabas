@@ -2,7 +2,7 @@ package control.test;
 
 
 import control.FuncionarioController;
-import model.Funcionario;
+import model.entity.Funcionario;
 
 public class TestControllerFuncionario implements TestControllerComponent {
 

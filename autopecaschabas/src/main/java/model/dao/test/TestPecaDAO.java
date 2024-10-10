@@ -1,6 +1,6 @@
 package model.dao.test;
 
-import model.Peca;
+import model.entity.Peca;
 import model.dao.PecaDAO;
 
 import java.util.List;

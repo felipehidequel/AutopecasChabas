@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.Peca;
+import model.entity.Peca;
 import model.db.DB;
 
 import java.sql.*;

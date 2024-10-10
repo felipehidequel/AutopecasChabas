@@ -1,9 +1,7 @@
 package model.dao;
 
 import model.db.DB;
-import model.Cliente;
-import model.Funcionario;
-import model.Peca;
+import model.entity.Cliente;
 
 import java.sql.*;
 import java.util.ArrayList;

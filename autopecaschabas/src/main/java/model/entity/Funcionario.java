@@ -1,4 +1,4 @@
-package model;
+package model.entity;
 
 public class Funcionario extends Pessoa{
     private String login;

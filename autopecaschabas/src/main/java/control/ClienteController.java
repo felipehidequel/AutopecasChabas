@@ -1,6 +1,6 @@
 package control;
 
-import model.Cliente;
+import model.entity.Cliente;
 import model.dao.ClienteDAO;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class ClienteController {
         }
         nome = nome.toUpperCase();
 
-        if (nome.trim().isEmpty()){
+        if (nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome não pode ser vazio");
         }
         nome = nome.toUpperCase();
@@ -21,15 +21,15 @@ public class ClienteController {
             throw new IllegalArgumentException("Telefone não pode ser nulo.\n");
         }
 
-        if (telefone.trim().isEmpty()){
+        if (telefone.trim().isEmpty()) {
             throw new IllegalArgumentException("Telefone não pode ser vazio.\n");
         }
 
-        if (telefone.matches("\\d+")){
+        if (telefone.matches("\\d+")) {
             throw new IllegalArgumentException("Telefone não pode conter letras.\n");
         }
 
-        if (telefone.length() != 11){
+        if (telefone.length() != 11) {
             throw new IllegalArgumentException("Digite apenas 11 números.");
         }
 
@@ -37,15 +37,15 @@ public class ClienteController {
             throw new IllegalArgumentException("CPF não pode ser nulo.\n");
         }
 
-        if (cpf.trim().isEmpty()){
+        if (cpf.trim().isEmpty()) {
             throw new IllegalArgumentException("CPF não pode ser vazio.\n");
         }
 
-        if (cpf.length() != 11){
+        if (cpf.length() != 11) {
             throw new IllegalArgumentException("Digite apenas 11 números.\n");
         }
 
-        if (cpf.matches("\\d+")){
+        if (cpf.matches("\\d+")) {
             throw new IllegalArgumentException("CPF não pode conter letras.");
         }
 

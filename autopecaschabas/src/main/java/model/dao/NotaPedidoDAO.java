@@ -1,8 +1,8 @@
 package model.dao;
 
-import model.NotaPedido;
-import model.Peca;
-import model.Pedido;
+import model.entity.NotaPedido;
+import model.entity.Peca;
+import model.entity.Pedido;
 import model.db.DB;
 
 import java.sql.*;

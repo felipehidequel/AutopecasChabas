@@ -1,11 +1,10 @@
 package model.dao.test;
 
-import model.Cliente;
-import model.Funcionario;
-import model.Pedido;
+import model.entity.Cliente;
+import model.entity.Funcionario;
+import model.entity.Pedido;
 import model.dao.ClienteDAO;
 import model.dao.FuncionarioDAO;
-import model.dao.PecaDAO;
 import model.dao.PedidoDAO;
 
 import java.util.Date;

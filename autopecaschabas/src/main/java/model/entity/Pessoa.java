@@ -1,4 +1,4 @@
-package model;
+package model.entity;
 
 public class Pessoa{
     private int id;
