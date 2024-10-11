@@ -124,4 +124,28 @@ public class PecaController{
     public static Peca buscarPecaByNome(String nome) {
         return (PecaDAO.listarPeca(nome.toUpperCase()));
     }
+
+    public static void atualizarEstoqueByIdPeca(int quantidadeEstoque, int idpeca){
+        Peca peca = PecaDAO.buscarPecaById(idpeca);
+
+        if (peca != null) {
+            peca.setQuantidadeEstoque(quantidadeEstoque);
+            PecaDAO.editaPeca(peca);
+        } else {
+            throw new IllegalArgumentException("Peça de ID " + idpeca + " não encontrada.");
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
