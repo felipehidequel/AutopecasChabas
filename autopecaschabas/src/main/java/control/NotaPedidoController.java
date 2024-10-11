@@ -22,11 +22,12 @@ public class NotaPedidoController {
         }
 
         NotaPedido nota = new NotaPedido(idNotaPedido, qntdPeca, peca, pedido);
+        System.out.println(nota);
         NotaPedidoDAO.criaNotaPedido(nota);
         return nota;
     }
 
-    public static NotaPedido editarNotaPedido(int idNotaPedido, int qntdPeca, Peca peca, Pedido pedido, double valorTotal) {
+    public static NotaPedido editarNotaPedido(int idNotaPedido, int qntdPeca, Peca peca, Pedido pedido) {
         var notaPedido = new NotaPedido(idNotaPedido, qntdPeca, peca, pedido);
         NotaPedidoDAO.editaNotaPedido(notaPedido);
         return notaPedido;
@@ -36,8 +37,8 @@ public class NotaPedidoController {
         return NotaPedidoDAO.listarNotasPedidos();
     }
 
-    public static NotaPedido buscarNotaPedido(NotaPedido id_pedido) {
-        return NotaPedidoDAO.buscarNotaPedido(id_pedido);
+    public static NotaPedido buscarNotaPedido(int id_pedido) {
+        return NotaPedidoDAO.buscarNotaPedidoByIdPedido(id_pedido);
     }
 
     public static boolean excluirNotaPedido(NotaPedido id_nota) {

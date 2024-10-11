@@ -1,5 +1,6 @@
 import model.entity.Funcionario;
 import utils.Logg;
+import view.TelaFuncionario;
 import view.TelaGerente;
 import view.TelaLogin;
 
@@ -12,7 +13,7 @@ public class App {
             if (user.getGerente()) {
                 TelaGerente.menuGerente(); // substituir por menu
             } else {
-                System.out.println("Menu para o funcionario comum"); // substituir por menu
+                TelaFuncionario.menuFuncionario(user);
             }
 
         }

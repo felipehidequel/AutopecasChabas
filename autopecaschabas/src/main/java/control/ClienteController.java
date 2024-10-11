@@ -25,7 +25,7 @@ public class ClienteController {
             throw new IllegalArgumentException("Telefone não pode ser vazio.\n");
         }
 
-        if (telefone.matches("\\d+")) {
+        if (!telefone.matches("\\d+")) {
             throw new IllegalArgumentException("Telefone não pode conter letras.\n");
         }
 
@@ -42,10 +42,10 @@ public class ClienteController {
         }
 
         if (cpf.length() != 11) {
-            throw new IllegalArgumentException("Digite apenas 11 números.\n");
+            throw new IllegalArgumentException("Digite apenas 11 números para CPF.\n");
         }
 
-        if (cpf.matches("\\d+")) {
+        if (!cpf.matches("\\d+")) {
             throw new IllegalArgumentException("CPF não pode conter letras.");
         }
 

@@ -90,6 +90,28 @@ public class NotaPedidoDAO {
         return null;
     }
 
+    public static NotaPedido buscarNotaPedidoByIdPedido(int pedidoId) {
+        var sql = "SELECT * FROM nota_pedido WHERE id_pedido = ?";
+        try (var conn = DB.getConnection()) {
+            assert conn != null;
+            try (var pstmt = conn.prepareStatement(sql)){
+                pstmt.setInt(1, pedidoId);
+                var rs = pstmt.executeQuery();
+
+                if (rs.next()){
+                    int id = rs.getInt("id_nota");
+                    int quantidadePeca = rs.getInt("quantidade_peca");
+                    Peca peca = PecaDAO.buscarPecaById(rs.getInt("id_peca"));
+                    Pedido pedido = PedidoDAO.buscarPedidoById(rs.getInt("id_pedido"));
+                    return new NotaPedido(id, quantidadePeca, peca, pedido);
+                }
+            }
+        } catch (SQLException | NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     public static List<NotaPedido> listarNotasPedidos() {
         List<NotaPedido> notaPedidos = new ArrayList<>();
         var sql = "SELECT id_nota AS id, quantidade_peca AS qntd, id_peca, id_pedido, valor_total AS valor FROM nota_pedido;";
