@@ -10,21 +10,50 @@ import view.TelaLogin;
 
 public class App {
     public static void main(String[] args) {
-        Funcionario user;
         Scanner scanner = new Scanner(System.in);
 
-        user = TelaLogin.login(scanner);
-
-        if (user != null) {
-            Logg.info("Login bem sucedido!");
-            if (user.getGerente()) {
-                TelaGerente.menuGerente(scanner); // substituir por menu
-            } else {
-                TelaFuncionario.menuFuncionario(user, scanner); // substituir por menu
-            }
-
-        }
-
+        menu(scanner);
+        
         scanner.close();
+    }
+
+    public static void menu(Scanner scanner) {
+        int opcao = 0;
+
+        do {
+            Utils.clearScreen();
+            Logg.info("=== Menu Principal ===");
+            System.out.println("1. Login");
+            System.out.println("2. Sair");
+            System.out.print("Escolha uma opção: ");
+
+            try {
+                opcao = scanner.nextInt();
+                scanner.nextLine();
+                switch (opcao) {
+                    case 1:
+                        Funcionario user = TelaLogin.login(scanner);
+                        if (user != null) {
+                            Logg.info("Login bem sucedido!");
+                            if (user.getGerente()) {
+                                TelaGerente.menuGerente(scanner);
+                            } else {
+                                TelaFuncionario.menuFuncionario(user, scanner);
+                            }
+                        }
+                        break;
+                    case 2:
+                        Logg.info("Saindo...");
+                        break;
+                    default:
+                        Logg.warning("Opção inválida, tente novamente.");
+                }
+
+            } catch (NumberFormatException e) {
+                Logg.warning("Informe somente números para a opção.");
+            } catch (Exception e) {
+                Logg.severe("Erro inesperado: " + e.getMessage());
+            }
+        } while (opcao != 2);
     }
 }
