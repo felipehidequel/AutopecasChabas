@@ -126,7 +126,12 @@ public class PecaController{
     }
 
     public static void atualizarEstoqueByIdPeca(int quantidadeEstoque, int idpeca){
+        if (quantidadeEstoque < 0)
+            throw new IllegalArgumentException("Quantidade em estoque não pode ser negativa.");
+
         Peca peca = PecaDAO.buscarPecaById(idpeca);
+
+
 
         if (peca != null) {
             peca.setQuantidadeEstoque(quantidadeEstoque);

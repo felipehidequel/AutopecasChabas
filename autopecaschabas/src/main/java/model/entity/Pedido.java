@@ -65,12 +65,12 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
-                "idPedido=" + idPedido +
-                ", data=" + data +
-                ", status='" + status + '\'' +
-                ", funcionario=" + funcionario.getNome() +
-                ", cliente=" + cliente.getCpf() +
-                '}';
+        String res = "\nID PEDIDO: "+ idPedido;
+        res += "\nDATA: " + data;
+        res += "\nSTATUS: "+ status;
+        res += "\nFUNCIONARIO: "+funcionario.getNome();
+        res+= "\nCLIENTE: "+cliente.getNome() + " CPF: "+cliente.getCpf();
+
+        return res;
     }
 }

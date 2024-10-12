@@ -38,16 +38,16 @@ public class TelaGerente {
                             try {
                                 Logg.info("<><><><> Preencha as informações para cadastrar um novo funcionario <><><><>");
                                 Logg.info("Insira o nome completo: ");
-                                String nome = scanner.nextLine(); 
+                                String nome = scanner.nextLine();
 
                                 Logg.info("Insira o nome de usuário: ");
-                                String login = scanner.nextLine(); 
+                                String login = scanner.nextLine();
 
                                 Logg.info("Insira a senha: ");
-                                String senha = scanner.nextLine(); 
+                                String senha = scanner.nextLine();
 
                                 Logg.info("O funcionário é gerente? (s/n): ");
-                                gerente = scanner.nextLine().equalsIgnoreCase("s"); 
+                                gerente = scanner.nextLine().equalsIgnoreCase("s");
 
                                 FuncionarioController.criaFuncionario(nome, login, senha, gerente);
                                 Logg.info("Funcionário cadastrado com sucesso!");
@@ -109,17 +109,13 @@ public class TelaGerente {
                         Logg.warning("Opção inválida! Tente novamente.");
                         break;
                 }
-            } while(!sair);
+            } while (!sair);
 
-        } catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             Logg.warning("Erro: " + e.getMessage());
             Logg.info("Por Favor, tente novamente.");
         } catch (Exception e) {
             Logg.severe("Erro inesperado: " + e.getMessage());
-        } 
+        }
     }
-
-    // public static void main(String[] args) {
-    //     TelaGerente.menuGerente();
-    // }
 }

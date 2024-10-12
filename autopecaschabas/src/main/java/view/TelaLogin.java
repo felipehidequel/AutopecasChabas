@@ -42,8 +42,4 @@ public class TelaLogin {
             return null;
         }
     }
-
-    // public static void main(String[] args) {
-    // TelaLogin.login();
-    // }
 }

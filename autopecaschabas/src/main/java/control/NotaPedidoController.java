@@ -22,7 +22,6 @@ public class NotaPedidoController {
         }
 
         NotaPedido nota = new NotaPedido(idNotaPedido, qntdPeca, peca, pedido);
-        System.out.println(nota);
         NotaPedidoDAO.criaNotaPedido(nota);
         return nota;
     }

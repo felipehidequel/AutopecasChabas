@@ -13,7 +13,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
         menu(scanner);
-        
+
         scanner.close();
     }
 

@@ -29,7 +29,7 @@ public class ClienteController {
             throw new IllegalArgumentException("Telefone não pode conter letras.\n");
         }
 
-        if (telefone.length() != 11) {
+        if (telefone.length() > 11) {
             throw new IllegalArgumentException("Digite apenas 11 números.");
         }
 
