@@ -4,22 +4,26 @@ import control.FuncionarioController;
 import model.entity.Funcionario;
 import utils.Logg;
 
-import java.io.Console;
 import java.util.Scanner;
 
+import utils.Utils;
+
 public class TelaLogin {
-    public static Funcionario login() {
+    public static Funcionario login(Scanner scanner) {
         String nome, senha;
         Funcionario func = null;
-        try (Scanner sc = new Scanner(System.in)) {
+        try {
+            Logg.info("==LOGIN==");
             boolean loginRealizado = false;
             do {
                 try {
                     Logg.info("Insira seu nome de usuário: ");
-                    nome = sc.nextLine();
+                    System.out.print("nome de usuario: ");
+                    nome = scanner.nextLine();
 
                     Logg.info("Insira a senha: ");
-                    senha = sc.nextLine();
+                    System.out.print("senha: ");
+                    senha = scanner.nextLine();
                     func = FuncionarioController.realizarLogin(nome, senha);
                     if (func == null) {
                         Logg.warning("Nome de usuário ou senha incorretos. Por favor, tente novamente.");
@@ -35,13 +39,11 @@ public class TelaLogin {
 
         } catch (Exception e) {
             Logg.severe("Erro inesperado: " + e.getMessage());
+            return null;
         }
-        return null;
     }
 
-    public static void main(String[] args) {
-        TelaLogin.login();
-    }
+    // public static void main(String[] args) {
+    // TelaLogin.login();
+    // }
 }
-
-

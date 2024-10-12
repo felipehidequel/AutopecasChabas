@@ -3,21 +3,22 @@ package view;
 import control.FuncionarioController;
 import control.PecaController;
 import model.entity.Funcionario;
-import model.entity.Peca;
 import utils.Logg;
 
 import java.util.List;
 import java.util.Scanner;
 
+import utils.Utils;
+
 public class TelaGerente {
 
-    public static void menuGerente() {
+    public static void menuGerente(Scanner scanner) {
         Funcionario func = null;
-        String nome, login, senha;
         boolean sair = false, gerente, funcionarioCadastrado = false;
         int id, quantidade;
+        int opcao = 0;
 
-        try(Scanner sc = new Scanner(System.in)) {
+        try {
             do {
                 Logg.info("\n-------------- Menu do Gerente --------------");
                 Logg.info("1. Cadastrar Novo Funcionário");
@@ -26,8 +27,9 @@ public class TelaGerente {
                 Logg.info("4. Atualizar estoque");
                 Logg.info("5. Sair");
 
-                int opcao = sc.nextInt();
-                sc.nextLine();
+                Logg.info("Informe uma opção");
+                System.out.print("Opção: ");
+                opcao = scanner.nextInt();
 
                 switch (opcao) {
                     case 1:
@@ -35,16 +37,16 @@ public class TelaGerente {
                             try {
                                 Logg.info("<><><><> Preencha as informações para cadastrar um novo funcionario <><><><>");
                                 Logg.info("Insira o nome completo: ");
-                                nome = sc.nextLine();
+                                String nome = scanner.nextLine(); 
 
                                 Logg.info("Insira o nome de usuário: ");
-                                login = sc.nextLine();
+                                String login = scanner.nextLine(); 
 
                                 Logg.info("Insira a senha: ");
-                                senha = sc.nextLine();
+                                String senha = scanner.nextLine(); 
 
                                 Logg.info("O funcionário é gerente? (s/n): ");
-                                gerente = sc.nextLine().equalsIgnoreCase("s");
+                                gerente = scanner.nextLine().equalsIgnoreCase("s"); 
 
                                 FuncionarioController.criaFuncionario(nome, login, senha, gerente);
                                 Logg.info("Funcionário cadastrado com sucesso!");
@@ -72,8 +74,7 @@ public class TelaGerente {
                             Logg.info("Não há funcionários cadastrados para remover.");
                         } else {
                             Logg.info("Digite o ID do funcionário a ser removido:");
-                            id = sc.nextInt();
-                            sc.nextLine();
+                            id = scanner.nextInt();
                             try {
                                 FuncionarioController.excluirFuncionario(id);
                                 Logg.info("Funcionário removido com sucesso!");
@@ -84,12 +85,10 @@ public class TelaGerente {
                         break;
                     case 4:
                         Logg.info("Digite o ID do pedido que deseja atualizar:");
-                        id = sc.nextInt();
-                        sc.nextLine();
+                        id = scanner.nextInt();
 
                         Logg.info("Informe a quantidade que será adicionada ao estoque:");
-                        quantidade = sc.nextInt();
-                        sc.nextLine();
+                        quantidade = scanner.nextInt();
 
                         try {
                             PecaController.atualizarEstoqueByIdPeca(quantidade, id);
@@ -111,10 +110,12 @@ public class TelaGerente {
         } catch(IllegalArgumentException e){
             Logg.warning("Erro: " + e.getMessage());
             Logg.info("Por Favor, tente novamente.");
-        }
+        } catch (Exception e) {
+            Logg.severe("Erro inesperado: " + e.getMessage());
+        } 
     }
 
-    public static void main(String[] args) {
-        TelaGerente.menuGerente();
-    }
+    // public static void main(String[] args) {
+    //     TelaGerente.menuGerente();
+    // }
 }

@@ -14,8 +14,7 @@ import java.util.Scanner;
 
 public class TelaFuncionario {
 
-    public static void menuFuncionario(Funcionario func) {
-        Scanner sc = new Scanner(System.in);
+    public static void menuFuncionario(Funcionario func, Scanner scanner) {
         int opcao = 0;
 
         do {
@@ -27,7 +26,7 @@ public class TelaFuncionario {
             System.out.print("Escolha uma opção: ");
 
             try {
-                opcao = Integer.parseInt(sc.nextLine());
+                opcao = scanner.nextInt();
 
                 switch (opcao) {
                     case 1:
@@ -36,7 +35,7 @@ public class TelaFuncionario {
                     case 2:
                         Logg.info("Informe o CPF do cliente");
                         System.out.print("CPF: ");
-                        String cpf = sc.nextLine();
+                        String cpf = scanner.nextLine();
                         Cliente cli = ClienteController.buscarCliente(cpf);
 
                         if (cli != null) {
@@ -61,8 +60,6 @@ public class TelaFuncionario {
                 Logg.severe("Erro inesperado: " + e.getMessage());
             }
         } while (opcao != 4);
-
-        sc.close();
     }
 
     private static void cadastrarCliente() {
@@ -141,6 +138,6 @@ public class TelaFuncionario {
     }
 
     public static void main(String[] args) {
-        menuFuncionario(FuncionarioController.buscaFuncionarioById(90));
+        menuFuncionario(FuncionarioController.buscaFuncionarioById(90), new Scanner(System.in));
     }
 }
