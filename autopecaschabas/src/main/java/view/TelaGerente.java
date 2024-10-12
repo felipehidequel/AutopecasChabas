@@ -5,6 +5,7 @@ import control.PecaController;
 import model.entity.Funcionario;
 import utils.Logg;
 
+import java.lang.ModuleLayer.Controller;
 import java.util.List;
 import java.util.Scanner;
 
@@ -84,7 +85,10 @@ public class TelaGerente {
                         }
                         break;
                     case 4:
-                        Logg.info("Digite o ID do pedido que deseja atualizar:");
+                        Logg.info("<><><><> Atualização de estoque <><><><>");
+                        PecaController.listarPecasPorCategoria();
+                        Logg.info("Digite o ID da peca que deseja atualizar:");
+                        System.out.print("ID: ");
                         id = scanner.nextInt();
 
                         Logg.info("Informe a quantidade que será adicionada ao estoque:");
