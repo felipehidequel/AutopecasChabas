@@ -8,6 +8,7 @@ import utils.Logg;
 import java.lang.ModuleLayer.Controller;
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 import utils.Utils;
 
@@ -36,7 +37,8 @@ public class TelaGerente {
                     case 1:
                         while (!funcionarioCadastrado) {
                             try {
-                                Logg.info("<><><><> Preencha as informações para cadastrar um novo funcionario <><><><>");
+                                Logg.info(
+                                        "<><><><> Preencha as informações para cadastrar um novo funcionario <><><><>");
                                 Logg.info("Insira o nome completo: ");
                                 String nome = scanner.nextLine();
 
@@ -65,7 +67,14 @@ public class TelaGerente {
                             Logg.info("Nenhum funcionário cadastrado.");
                         } else {
                             for (Funcionario funcionario : funcionarios) {
-                                Logg.info("Nome: " + funcionario.getNome() + ", Login: " + funcionario.getLogin() + ", Cargo: " + (funcionario.getGerente() ? "Gerente" : "Funcionário ativo")); //mudar o cargo caso não seja gerente
+                                Logg.info("Nome: " + funcionario.getNome() + ", Login: " + funcionario.getLogin()
+                                        + ", Cargo: " + (funcionario.getGerente() ? "Gerente" : "Funcionário ativo")); // mudar
+                                                                                                                       // o
+                                                                                                                       // cargo
+                                                                                                                       // caso
+                                                                                                                       // não
+                                                                                                                       // seja
+                                                                                                                       // gerente
                             }
                         }
                         break;
@@ -114,6 +123,11 @@ public class TelaGerente {
         } catch (IllegalArgumentException e) {
             Logg.warning("Erro: " + e.getMessage());
             Logg.info("Por Favor, tente novamente.");
+        } catch (InputMismatchException e) {
+            Logg.warning("Erro: informe um valor válido.");
+            if (scanner.hasNextLine()) {
+                scanner.nextLine();
+            }
         } catch (Exception e) {
             Logg.severe("Erro inesperado: " + e.getMessage());
         }

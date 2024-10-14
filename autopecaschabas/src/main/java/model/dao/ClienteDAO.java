@@ -41,13 +41,14 @@ public class ClienteDAO {
         String telefone = cliente.getTelefone();
         String cpf = cliente.getCpf();
 
-        var sql = "UPDATE cliente SET nome = ?, telefone = ?, cpf = ?;";
+        var sql = "UPDATE cliente SET nome = ?, telefone = ?, cpf = ? WHERE id_cliente = ?";
         try (var conn = DB.getConnection()) {
             assert conn != null;
             try (var pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, nome);
                 pstmt.setString(2, telefone);
                 pstmt.setString(3, cpf);
+                pstmt.setInt(4,cliente.getId());
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {

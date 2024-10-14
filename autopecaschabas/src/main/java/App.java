@@ -7,6 +7,7 @@ import utils.Logg;
 import view.TelaFuncionario;
 import view.TelaGerente;
 import view.TelaLogin;
+import java.util.InputMismatchException;
 
 public class App {
     public static void main(String[] args) {
@@ -29,7 +30,8 @@ public class App {
 
             try {
                 opcao = scanner.nextInt();
-                scanner.nextLine();
+                if (scanner.hasNextLine())
+                    scanner.nextLine();
                 switch (opcao) {
                     case 1:
                         Funcionario user = TelaLogin.login(scanner);
@@ -51,6 +53,11 @@ public class App {
 
             } catch (NumberFormatException e) {
                 Logg.warning("Informe somente números para a opção.");
+            } catch (InputMismatchException e) {
+                Logg.warning("Erro: informe um valor válido.");
+                if (scanner.hasNextLine()) {
+                    scanner.nextLine();
+                }
             } catch (Exception e) {
                 Logg.severe("Erro inesperado: " + e.getMessage());
             }

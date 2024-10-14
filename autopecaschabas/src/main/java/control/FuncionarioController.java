@@ -7,6 +7,11 @@ import model.dao.FuncionarioDAO;
 
 public class FuncionarioController {
     public static void criaFuncionario(String nome, String login, String senha, boolean gerente) {
+        Funcionario funcionario = FuncionarioDAO.buscaFuncionarioByLogin(login);
+        if (funcionario != null) {
+            throw new IllegalArgumentException("Login já existente.");
+        }
+
         if (nome == null) {
             throw new IllegalArgumentException("Nome não pode ser nulo.\n");
         }
@@ -44,6 +49,10 @@ public class FuncionarioController {
     }
 
     public static void editaFuncionario(int id, String nome, String login, String senha, boolean gerente) {
+        if (FuncionarioDAO.buscaFuncionarioByLogin(login) != null) {
+            throw new IllegalArgumentException("Login existente!");
+        }
+
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
         }
@@ -103,7 +112,6 @@ public class FuncionarioController {
         if (login == null || login.trim().isEmpty()) {
             throw new IllegalArgumentException("Login não pode ser nulo ou vazio.");
         }
-
         Funcionario funcionario = FuncionarioDAO.buscaFuncionarioByLogin(login);
         if (funcionario == null) {
             throw new IllegalArgumentException("Funcionário não encontrado.");

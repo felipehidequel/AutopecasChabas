@@ -34,7 +34,7 @@ public class TelaLogin {
                     Logg.warning("Erro: " + e.getMessage());
                     Logg.info("Por favor, tente novamente!");
                 }
-            } while (!loginRealizado); // Loop continua até login ser bem-sucedido
+            } while (!loginRealizado);
             return func;
 
         } catch (Exception e) {

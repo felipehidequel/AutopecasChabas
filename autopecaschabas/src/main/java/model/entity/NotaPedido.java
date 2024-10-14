@@ -56,6 +56,6 @@ public class NotaPedido {
     }
 
     public String toString() {
-        return "ID NOTA: " + idNotaPedido + "\n" + "Peca: " + peca + "\n" + "Pedido: " + "\t" + pedido + "\t" + quantidadePeca + "\n" + "Valor Total: " + "\t" + valorTotal + "\n";
+        return "ID NOTA: " + idNotaPedido + "\n" + "Peca: " + peca.getNome() + "\n" + "Pedido: " + "\t" + pedido + "\n"+"Quantidade: " + quantidadePeca + "\n" + "Valor Total: " + "\t" + valorTotal + "\n";
     }
 }

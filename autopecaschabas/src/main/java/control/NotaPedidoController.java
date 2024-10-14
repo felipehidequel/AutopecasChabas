@@ -5,6 +5,7 @@ import java.util.List;
 import model.entity.NotaPedido;
 import model.entity.Peca;
 import model.entity.Pedido;
+import utils.Logg;
 import model.dao.NotaPedidoDAO;
 
 public class NotaPedidoController {
@@ -28,6 +29,19 @@ public class NotaPedidoController {
 
     public static NotaPedido editarNotaPedido(int idNotaPedido, int qntdPeca, Peca peca, Pedido pedido) {
         var notaPedido = new NotaPedido(idNotaPedido, qntdPeca, peca, pedido);
+
+        if (qntdPeca < 0) {
+            throw new IllegalArgumentException("A quantidade de peças não pode ser negativa.");
+        }
+
+        if (peca == null) {
+            throw new IllegalArgumentException("A peça não pode ser nula ou vazia.");
+        }
+
+        if (pedido == null) {
+            throw new IllegalArgumentException("O pedido não pode ser nulo ou vazio.");
+        }
+
         NotaPedidoDAO.editaNotaPedido(notaPedido);
         return notaPedido;
     }
@@ -48,4 +62,19 @@ public class NotaPedidoController {
         NotaPedidoDAO.excluirNotaPedido(nota);
         return true;
     }
+    public static void listarNotaByCliente(int id_cliente) {
+        List<NotaPedido> notas = NotaPedidoDAO.listarNotasPedidos();
+        Logg.info("Notas do cliente: ");
+        if(notas.isEmpty()){
+            Logg.info("Não há notas cadastradas.");
+            return;
+        }
+
+        for (NotaPedido nota : notas) {
+            if (nota.getPedido().getCliente().getId() == id_cliente) {
+                System.out.println(nota);
+            }
+        }
+    }
 }
+
