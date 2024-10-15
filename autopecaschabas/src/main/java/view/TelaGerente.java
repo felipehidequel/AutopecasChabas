@@ -34,56 +34,6 @@ public class TelaGerente {
                         gerenciarFuncionario(scanner);
                         break;
                     case 2:
-                        Logg.info("<><><><> Listagem de funcionários ativos <><><><>");
-                        List<Funcionario> funcionarios = FuncionarioController.listarFuncionarios();
-                        if (funcionarios.isEmpty()) {
-                            Logg.info("Nenhum funcionário cadastrado.");
-                        } else {
-                            for (Funcionario funcionario : funcionarios) {
-                                Logg.info("Nome: " + funcionario.getNome() + ", Login: " + funcionario.getLogin()
-                                        + ", Cargo: " + (funcionario.getGerente() ? "Gerente" : "Funcionário ativo")); // mudar
-                                                                                                                       // o
-                                                                                                                       // cargo
-                                                                                                                       // caso
-                                                                                                                       // não
-                                                                                                                       // seja
-                                                                                                                       // gerente
-                            }
-                        }
-                        break;
-                    case 3:
-                        List<Funcionario> verificaFuncionario = FuncionarioController.listarFuncionarios();
-                        if (verificaFuncionario.isEmpty()) {
-                            Logg.info("Não há funcionários cadastrados para remover.");
-                        } else {
-                            Logg.info("Digite o ID do funcionário a ser removido:");
-                            id = scanner.nextInt();
-                            try {
-                                FuncionarioController.excluirFuncionario(id);
-                                Logg.info("Funcionário removido com sucesso!");
-                            } catch (IllegalArgumentException e) {
-                                Logg.warning("Erro ao remover funcionário: " + e.getMessage());
-                            }
-                        }
-                        break;
-                    case 4:
-                        Logg.info("<><><><> Atualização de estoque <><><><>");
-                        PecaController.listarPecasPorCategoria();
-                        Logg.info("Digite o ID da peca que deseja atualizar:");
-                        System.out.print("ID: ");
-                        id = scanner.nextInt();
-
-                        Logg.info("Informe a quantidade que será adicionada ao estoque:");
-                        quantidade = scanner.nextInt();
-
-                        try {
-                            PecaController.atualizarEstoqueByIdPeca(quantidade, id);
-                            Logg.info("Estoque da peça de ID " + id + " atualizado com sucesso!");
-                        } catch (IllegalArgumentException e) {
-                            Logg.warning("Erro ao atualizar estoque: " + e.getMessage());
-                        }
-                        break;
-                    case 5:
                         Logg.info("Saindo do menu do gerente.");
                         sair = true;
                         break;
