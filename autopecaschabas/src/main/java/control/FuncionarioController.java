@@ -35,7 +35,7 @@ public class FuncionarioController {
         }
 
         if (senha == null || senha.length() < 8) {
-            throw new IllegalArgumentException("A senha deve ter no mínimo 6 caracteres.\n");
+            throw new IllegalArgumentException("A senha deve ter no mínimo 8 caracteres.\n");
         }
         if (!senha.matches(".*[A-Za-z].*") || !senha.matches(".*[0-9].*")) {
             throw new IllegalArgumentException("A senha deve conter pelo menos uma letra e um número.");

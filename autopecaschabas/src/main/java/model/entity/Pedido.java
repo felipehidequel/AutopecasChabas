@@ -2,6 +2,8 @@ package model.entity;
 
 import java.util.Date;
 
+import utils.Utils;
+
 public class Pedido {
 
     private int idPedido;
@@ -65,11 +67,12 @@ public class Pedido {
 
     @Override
     public String toString() {
-        String res = "\nID PEDIDO: "+ idPedido;
+        String res = "\nID PEDIDO: " + idPedido;
         res += "\nDATA: " + data;
-        res += "\nSTATUS: "+ status;
-        res += "\nFUNCIONARIO: "+funcionario.getNome();
-        res+= "\nCLIENTE: "+cliente.getNome() + " CPF: "+cliente.getCpf();
+        res += "\nSTATUS: " + status;
+        res += "\nFUNCIONARIO: " + funcionario.getNome();
+        res += "\nCLIENTE: " + cliente.getNome() + " CPF: " + Utils.formatCPF(cliente.getCpf()) + " TELEFONE: "
+                + Utils.formatTelefone(cliente.getTelefone());
 
         return res;
     }

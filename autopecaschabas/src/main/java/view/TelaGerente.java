@@ -37,6 +37,9 @@ public class TelaGerente {
                     case 1:
                         while (!funcionarioCadastrado) {
                             try {
+                                if (scanner.hasNextLine()) {
+                                    scanner.nextLine();
+                                }
                                 Logg.info(
                                         "<><><><> Preencha as informações para cadastrar um novo funcionario <><><><>");
                                 Logg.info("Insira o nome completo: ");
@@ -94,6 +97,9 @@ public class TelaGerente {
                         }
                         break;
                     case 4:
+                        if(scanner.hasNextLine()){
+                            scanner.nextLine();
+                        }
                         Logg.info("<><><><> Atualização de estoque <><><><>");
                         PecaController.listarPecasPorCategoria();
                         Logg.info("Digite o ID da peca que deseja atualizar:");

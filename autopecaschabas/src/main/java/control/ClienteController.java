@@ -74,7 +74,7 @@ public class ClienteController {
         }
 
         if (telefone.length() > 11) {
-            throw new IllegalArgumentException("Digite apenas 11 números.");
+            throw new IllegalArgumentException("Digite apenas 11 números para telefone.");
         }
 
         if (cpf == null) {

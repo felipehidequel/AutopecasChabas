@@ -1,5 +1,7 @@
 package model.entity;
 
+import utils.Utils;
+
 public class Cliente extends Pessoa {
     private String telefone;
     private String cpf;
@@ -29,6 +31,6 @@ public class Cliente extends Pessoa {
 
     @Override
     public String toString() {
-        return super.toString() + "Telfone: " + telefone + " CPF: " + cpf;
+        return super.toString() + "Telfone: " + Utils.formatTelefone(telefone) + " CPF: " + Utils.formatCPF(cpf) + "\n";
     }
 }
