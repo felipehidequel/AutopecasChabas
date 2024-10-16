@@ -195,13 +195,13 @@ public class TelaGerente {
     private static void editarFuncionario(int id, Funcionario funci, Scanner scanner) {
         int opcao = 0;
         String nome, login, senha;
-        boolean gerente;
+        boolean gerente, sair = false;
         do{
             Logg.info("=== Editar Funcionário ===");
             System.out.println("1. Editar Nome");
             System.out.println("2. Editar Login");
             System.out.println("3. Editar Cargo");
-            System.out.println("4. Voltar para Menu do gerente");
+            System.out.println("4. Voltar Para Menu de Gerenciamento de Funcionário");
             System.out.println("Escolha uma opção: ");
 
             try{
@@ -233,6 +233,8 @@ public class TelaGerente {
                         break;
                     case 4:
                         Logg.info("Saindo...");
+                        gerenciarFuncionario(scanner);
+                        sair = true;
                         break;
                     default:
                         Logg.warning("Opção inválida, tente novamente.");
@@ -253,6 +255,6 @@ public class TelaGerente {
             } catch (Exception e) {
                 Logg.warning(e.getMessage());
             }
-        } while (opcao != 4);
+        } while (!sair);
     }
 }
