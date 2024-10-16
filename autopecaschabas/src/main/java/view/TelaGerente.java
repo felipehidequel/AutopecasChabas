@@ -31,68 +31,9 @@ public class TelaGerente {
 
                 switch (opcao) {
                     case 1:
-                        while (!funcionarioCadastrado) {
-                            try {
-                                if (scanner.hasNextLine()) {
-                                    scanner.nextLine();
-                                }
-                                Logg.info(
-                                        "<><><><> Preencha as informações para cadastrar um novo funcionario <><><><>");
-                                Logg.info("Insira o nome completo: ");
-                                String nome = scanner.nextLine();
-
-                                Logg.info("Insira o nome de usuário: ");
-                                String login = scanner.nextLine();
-
-                                Logg.info("Insira a senha: ");
-                                String senha = scanner.nextLine();
-
-                                Logg.info("O funcionário é gerente? (s/n): ");
-                                gerente = scanner.nextLine().equalsIgnoreCase("s");
-
-                                FuncionarioController.criaFuncionario(nome, login, senha, gerente);
-                                Logg.info("Funcionário cadastrado com sucesso!");
-                                funcionarioCadastrado = true;
-                            } catch (IllegalArgumentException e) {
-                                Logg.warning("Erro: " + e.getMessage());
-                                Logg.info("Por favor, tente novamente.");
-                            }
-                        }
+                        gerenciarFuncionario(scanner);
                         break;
                     case 2:
-                        Logg.info("<><><><> Listagem de funcionários ativos <><><><>");
-                        List<Funcionario> funcionarios = FuncionarioController.listarFuncionarios();
-                        if (funcionarios.isEmpty()) {
-                            Logg.info("Nenhum funcionário cadastrado.");
-                        } else {
-                            for (Funcionario funcionario : funcionarios) {
-                                Logg.info("Nome: " + funcionario.getNome() + ", Login: " + funcionario.getLogin()
-                                        + ", Cargo: " + (funcionario.getGerente() ? "Gerente" : "Funcionário ativo")); // mudar
-                                                                                                                       // o
-                                                                                                                       // cargo
-                                                                                                                       // caso
-                                                                                                                       // não
-                                                                                                                       // seja
-                                                                                                                       // gerente
-                            }
-                        }
-                        break;
-                    case 3:
-                        List<Funcionario> verificaFuncionario = FuncionarioController.listarFuncionarios();
-                        if (verificaFuncionario.isEmpty()) {
-                            Logg.info("Não há funcionários cadastrados para remover.");
-                        } else {
-                            Logg.info("Digite o ID do funcionário a ser removido:");
-                            id = scanner.nextInt();
-                            try {
-                                FuncionarioController.excluirFuncionario(id);
-                                Logg.info("Funcionário removido com sucesso!");
-                            } catch (IllegalArgumentException e) {
-                                Logg.warning("Erro ao remover funcionário: " + e.getMessage());
-                            }
-                        }
-                        break;
-                    case 4:
                         if(scanner.hasNextLine()){
                             scanner.nextLine();
                         }
@@ -112,7 +53,7 @@ public class TelaGerente {
                             Logg.warning("Erro ao atualizar estoque: " + e.getMessage());
                         }
                         break;
-                    case 5:
+                    case 3:
                         Logg.info("Saindo do menu do gerente.");
                         sair = true;
                         break;
