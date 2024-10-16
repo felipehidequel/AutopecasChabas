@@ -30,7 +30,7 @@ public class TestFuncionarioDAO implements TestDaoComponent {
 
             System.out.println("Atualiza informção funcionario");
             func.setNome("Doutor Gerente");
-            FuncionarioDAO.editaFuncario(func);
+            FuncionarioDAO.editaFuncioario(func);
             System.out.println("Funcionario atualizado!");
 
             System.out.println("Buscando funcionario por nome:");

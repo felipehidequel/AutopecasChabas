@@ -47,50 +47,51 @@ public class FuncionarioController {
         Funcionario novoFuncionario = new Funcionario(nome, login.toLowerCase(), senha, gerente);
         FuncionarioDAO.criarFuncionario(novoFuncionario);
     }
+// FLAGS
+//1. Editar Nome
+//2. Editar Login
+//3. Editar Cargo
+    public static void editaFuncionario(int id, String nome, String login, String senha, boolean gerente, int flag) {
+        switch (flag) {
+            case 1:
+                if (nome == null || nome.trim().isEmpty()) {
+                    throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
+                }
+                nome = nome.toUpperCase();
+                break;
+            case 2:
+                if (FuncionarioDAO.buscaFuncionarioByLogin(login) != null) {
+                    throw new IllegalArgumentException("Login existente!");
+                }
 
-    public static void editaFuncionario(int id, String nome, String login, String senha, boolean gerente) {
-        if (FuncionarioDAO.buscaFuncionarioByLogin(login) != null) {
-            throw new IllegalArgumentException("Login existente!");
+                if (login == null || login.trim().isEmpty()) {
+                    throw new IllegalArgumentException("Login não pode ser nulo ou vazio.");
+                }
+                if (!login.matches("[a-zA-Z0-9]+")) {
+                    throw new IllegalArgumentException("Login deve conter apenas letras e números.");
+                }
+
+                if (senha == null || senha.length() < 8) {
+                    throw new IllegalArgumentException("A senha deve ter no mínimo 6 caracteres.");
+                }
+                if (!senha.matches(".*[A-Za-z].*") || !senha.matches(".*[0-9].*")) {
+                    throw new IllegalArgumentException("A senha deve conter pelo menos uma letra e um número.");
+                }
+                break;
         }
 
-        if (nome == null || nome.trim().isEmpty()) {
-            throw new IllegalArgumentException("Nome não pode ser nulo ou vazio.");
-        }
-        nome = nome.toUpperCase();
-
-        if (login == null || login.trim().isEmpty()) {
-            throw new IllegalArgumentException("Login não pode ser nulo ou vazio.");
-        }
-        if (!login.matches("[a-zA-Z0-9]+")) {
-            throw new IllegalArgumentException("Login deve conter apenas letras e números.");
-        }
-
-        if (senha == null || senha.length() < 8) {
-            throw new IllegalArgumentException("A senha deve ter no mínimo 6 caracteres.");
-        }
-        if (!senha.matches(".*[A-Za-z].*") || !senha.matches(".*[0-9].*")) {
-            throw new IllegalArgumentException("A senha deve conter pelo menos uma letra e um número.");
-        }
-
-        Funcionario funcionario = FuncionarioDAO.buscarFuncionarioById(id);
-        if (funcionario == null) {
-            throw new IllegalArgumentException("Funcionário não encontrado.");
-        }
+        Funcionario funcionario = buscaFuncionarioById(id);
 
         funcionario.setNome(nome);
         funcionario.setLogin(login.toLowerCase());
         funcionario.setSenha(senha);
         funcionario.setGerente(gerente);
 
-        FuncionarioDAO.editaFuncario(funcionario);
+        FuncionarioDAO.editaFuncioario(funcionario);
     }
 
     public static void excluirFuncionario(int id) {
-        Funcionario funcionario = FuncionarioDAO.buscarFuncionarioById(id);
-        if (funcionario == null) {
-            throw new IllegalArgumentException("Funcionário não encontrado.");
-        }
-
+        Funcionario funcionario = buscaFuncionarioById(id);
         FuncionarioDAO.excluirFuncionario(funcionario);
     }
 

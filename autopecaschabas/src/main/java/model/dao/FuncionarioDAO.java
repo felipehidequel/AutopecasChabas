@@ -47,13 +47,13 @@ public class FuncionarioDAO {
 
     }
 
-    public static void editaFuncario(Funcionario funcionario) {
+    public static void editaFuncioario(Funcionario funcionario) {
         String nome = funcionario.getNome();
         String login = funcionario.getLogin();
         String senha = funcionario.getSenha();
         Boolean gerente = funcionario.getGerente();
 
-        var sql = "UPDATE funcionario SET nome = ?, login = ?, senha = ?, gerente = ?;";
+        var sql = "UPDATE funcionario SET nome = ?, login = ?, senha = ?, gerente = ? WHERE id_func = ?;";
         try (var conn = DB.getConnection()) {
             assert conn != null;
             try (var pstmt = conn.prepareStatement(sql)) {
@@ -61,6 +61,7 @@ public class FuncionarioDAO {
                 pstmt.setString(2, login);
                 pstmt.setString(3, senha);
                 pstmt.setBoolean(4, gerente);
+                pstmt.setInt(5, funcionario.getId());
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {

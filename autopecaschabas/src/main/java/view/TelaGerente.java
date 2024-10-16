@@ -92,6 +92,9 @@ public class TelaGerente {
 
             try {
                 opcao = scanner.nextInt();
+            if(scanner.hasNextLine()){
+                scanner.nextLine();
+            }
 
                 switch (opcao) {
                     case 1:
@@ -234,7 +237,7 @@ public class TelaGerente {
                 }
 
                 if (opcao >= 1 && opcao <= 3) {
-                    FuncionarioController.editaFuncionario(id, funci.getNome(), funci.getLogin(), funci.getSenha(), funci.getGerente());
+                    FuncionarioController.editaFuncionario(id, funci.getNome(), funci.getLogin(), funci.getSenha(), funci.getGerente(), opcao);
                     Logg.info("Cliente editado com sucesso!");
                 }
 

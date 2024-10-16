@@ -22,7 +22,7 @@ public class TestControllerFuncionario implements TestControllerComponent {
             funci = FuncionarioController.buscaFuncionarioByLogin(login);
 
             FuncionarioController.realizarLogin(login, senha);
-            FuncionarioController.editaFuncionario(funci.getId(), nome, "Novologin", senha, gerente);
+            FuncionarioController.editaFuncionario(funci.getId(), nome, "Novologin", senha, gerente, 3);
 
             for (Funcionario f :FuncionarioController.listarFuncionarios())
                 System.out.println(f);
