@@ -151,8 +151,6 @@ public class TelaGerente {
                         }
                         break;
                     case 4:
-                        if (scanner.hasNextLine())
-                            scanner.nextLine();
                         List<Funcionario> func = FuncionarioController.listarFuncionarios();
                         if (func.isEmpty()){
                             Logg.warning("Nenhum Funcionário cadastrado.");
@@ -216,18 +214,22 @@ public class TelaGerente {
                         Logg.info("Informe o novo nome");
                         System.out.println("Nome completo: ");
                         nome = scanner.nextLine();
+                        funci.setNome(nome);
                         break;
                     case 2:
                         Logg.info("Informe o novo login");
                         System.out.println("Novo nome de usuário: ");
                         login = scanner.nextLine();
+                        funci.setLogin(login);
                         System.out.println("Nova senha: ");
                         senha = scanner.nextLine();
+                        funci.setSenha(senha);
                         break;
                     case 3:
                         Logg.info("Alterar cargo de funcionário");
                         System.out.println("Deseja alterar cargo de [FUNCIONÁRIO ATIVO] para [GERENTE] (s/n)");
                         gerente = scanner.nextLine().equalsIgnoreCase("s");
+                        funci.setGerente(gerente);
                         break;
                     case 4:
                         Logg.info("Saindo...");
@@ -238,7 +240,7 @@ public class TelaGerente {
 
                 if (opcao >= 1 && opcao <= 3) {
                     FuncionarioController.editaFuncionario(id, funci.getNome(), funci.getLogin(), funci.getSenha(), funci.getGerente(), opcao);
-                    Logg.info("Cliente editado com sucesso!");
+                    Logg.info("Funcinário editado com sucesso!");
                 }
 
             } catch (NumberFormatException e) {
