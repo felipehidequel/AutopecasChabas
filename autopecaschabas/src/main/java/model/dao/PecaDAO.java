@@ -64,30 +64,31 @@ public class PecaDAO {
         }
     }
 
-    public static Peca listarPeca(String nomePeca) {
-        var sql = "SELECT id_peca AS id, nome, categoria, fabricante, preco, quantidade_estoque AS qtd FROM peca WHERE nome = ?;";
+    public static List<Peca> listarPecasPorCategoria(String categoria) {
+        List<Peca> pecas = new ArrayList<>();
+        var sql = "SELECT id_peca AS id, nome, categoria, fabricante, preco, quantidade_estoque AS qtd FROM peca WHERE categoria = ?;";
         try (var conn = DB.getConnection()) {
             assert conn != null;
             try (var pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, nomePeca);
+                pstmt.setString(1, categoria); // Definindo o parâmetro da categoria
                 var rs = pstmt.executeQuery();
-
-                if (rs.next()) {
+                while (rs.next()) {
                     int id = rs.getInt("id");
                     String nome = rs.getString("nome");
-                    String categoria = rs.getString("categoria");
                     String fabricante = rs.getString("fabricante");
                     double preco = rs.getDouble("preco");
                     int quantidadeEstoque = rs.getInt("qtd");
-
-                    return new Peca(id, nome, categoria, fabricante, preco, quantidadeEstoque);
+    
+                    pecas.add(new Peca(id, nome, categoria, fabricante, preco, quantidadeEstoque));
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return null;
         }
-        return null;
+        return pecas;
     }
+    
 
     public static Peca buscarPecaById(int idPeca){
         var sql = "SELECT id_peca, nome, categoria, fabricante, preco, quantidade_estoque AS qtd FROM peca WHERE id_peca = ?;";
@@ -114,8 +115,7 @@ public class PecaDAO {
         return null;
     }
 
-
-    public static List<Peca> listaPecas() {
+    public static List<Peca> listarPecas() {
         List<Peca> pecas = new ArrayList<>();
         var sql = "SELECT id_peca AS id, nome, categoria, fabricante, preco, quantidade_estoque AS qtd FROM peca;";
         try (var conn = DB.getConnection()) {
@@ -129,14 +129,20 @@ public class PecaDAO {
                     String fabricante = rs.getString("fabricante");
                     double preco = rs.getDouble("preco");
                     int quantidadeEstoque = rs.getInt("qtd");
-
+    
                     pecas.add(new Peca(id, nome, categoria, fabricante, preco, quantidadeEstoque));
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
+            return null; // Retorna null em caso de erro
         }
-        return pecas;
+        return pecas; // Retorna a lista de peças
+    }
+
+    public static Peca listarPeca(String upperCase) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listarPeca'");
     }
 }
+    

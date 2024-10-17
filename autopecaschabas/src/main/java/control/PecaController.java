@@ -76,7 +76,7 @@ public class PecaController{
 
     public static List<Peca> listarPeca(){
         try{
-            List<Peca> pecas = PecaDAO.listaPecas();
+            List<Peca> pecas = PecaDAO.listarPecas();
             return pecas != null ? pecas : new ArrayList<>();
 
         }catch(Exception e){
@@ -86,7 +86,7 @@ public class PecaController{
     }
 
     public static void listarPecasPorCategoria() {
-        List<Peca> pecas = PecaDAO.listaPecas();
+        List<Peca> pecas = PecaDAO.listarPecas();
 
         Map<String, List<Peca>> pecasPorCategoria = pecas.stream()
                 .collect(Collectors.groupingBy(Peca::getCategoria));

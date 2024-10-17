@@ -3,6 +3,7 @@ package view;
 import control.FuncionarioController;
 import control.PecaController;
 import model.entity.Funcionario;
+import model.entity.Peca;
 import utils.Logg;
 
 import java.lang.ModuleLayer.Controller;
@@ -24,7 +25,7 @@ public class TelaGerente {
             do {
                 Logg.info("=== Menu do Gerente ===");
                 System.out.println("1. Gerenciar funcionários");
-                System.out.println("2. Gerenciar estoque de peças");
+                System.out.println("2. Gerenciar estoque");
                 System.out.println("3. Sair");
                 System.out.print("Escolha uma opção: ");
                 opcao = scanner.nextInt();
@@ -34,25 +35,7 @@ public class TelaGerente {
                         gerenciarFuncionario(scanner);
                         break;
                     case 2:
-                        if(scanner.hasNextLine()){
-                            scanner.nextLine();
-                        }
-                        Logg.info("<><><><> Atualização de estoque <><><><>");
-                        PecaController.listarPecasPorCategoria();
-                        Logg.info("Digite o ID da peca que deseja atualizar:");
-                        System.out.print("ID: ");
-                        id = scanner.nextInt();
-
-                        Logg.info("Informe a quantidade que será adicionada ao estoque:");
-                        quantidade = scanner.nextInt();
-
-                        try {
-                            PecaController.atualizarEstoqueByIdPeca(quantidade, id);
-                            Logg.info("Estoque da peça de ID " + id + " atualizado com sucesso!");
-                        } catch (IllegalArgumentException e) {
-                            Logg.warning("Erro ao atualizar estoque: " + e.getMessage());
-                        }
-                        break;
+                        gerenciarEstoque(scanner);
                     case 3:
                         Logg.info("Saindo do menu do gerente.");
                         sair = true;
@@ -101,14 +84,44 @@ public class TelaGerente {
                         while (!funcionarioCadastrado) {
                             try {
                                 Logg.info("=== Preencha as informações para cadastrar um novo funcionario ===");
+                                System.out.println("Caso queira voltar basta digitar 0");
                                 System.out.println("Insira o nome completo: ");
                                 nome = scanner.nextLine();
+
+                                if (nome.equals("0")) {
+                                    Logg.info("Retornando ao menu principal...");
+                                    return;
+                                }
+                                
+                                if (nome.trim().isEmpty()) {
+                                    Logg.warning("O campo nome completo não pode estar vazio. Por favor, tente novamente.");
+                                    return;
+                                }
 
                                 System.out.println("Insira o nome de usuário: ");
                                 login = scanner.nextLine();
 
+                                if (login.equals("0")) {
+                                    Logg.info("Retornando ao menu principal...");
+                                    return;
+                                }
+
+                                if (login.trim().isEmpty()) {
+                                    Logg.warning("O campo nome de usuário não pode estar vazio. Por favor, tente novamente.");
+                                    return;
+                                }
+
                                 System.out.println("Insira a senha: ");
                                 senha = scanner.nextLine();
+                                if (senha.equals("0")) {
+                                    Logg.info("Retornando ao menu principal...");
+                                    return;
+                                }
+
+                                if (senha.trim().isEmpty()) {
+                                    Logg.warning("o compo senha não pode estar vazio. Por favor, tente novamente.");
+                                    return;
+                                }
 
                                 System.out.println("O funcionário é gerente? (s/n): ");
                                 gerente = scanner.nextLine().equalsIgnoreCase("s");
@@ -116,6 +129,7 @@ public class TelaGerente {
                                 FuncionarioController.criaFuncionario(nome, login, senha, gerente);
                                 Logg.info("Funcionário cadastrado com sucesso!");
                                 funcionarioCadastrado = true;
+
                             } catch (IllegalArgumentException e) {
                                 Logg.warning("Erro: " + e.getMessage());
                                 Logg.info("Por favor, tente novamente.");
@@ -142,6 +156,7 @@ public class TelaGerente {
                             Logg.info("=== Remover Funcionário do Sistema ===");
                             System.out.println("Digite o ID do funcionário a ser removido:");
                             id = scanner.nextInt();
+
                             try {
                                 FuncionarioController.excluirFuncionario(id);
                                 Logg.info("Funcionário removido com sucesso!");
@@ -174,8 +189,10 @@ public class TelaGerente {
                             Logg.warning("Funcionário não encontrado.");
                         }
                         break;
+
                     case 5:
                         Logg.info("Saindo...");
+                        menuGerente(scanner);
                         break;
                     default:
                         Logg.warning("Opção inválida, tente novamente.");
@@ -253,4 +270,153 @@ public class TelaGerente {
             }
         } while (opcao != 4);
     }
+
+private static void gerenciarEstoque(Scanner scanner) {
+    int opcao = 0;
+    do {
+        Logg.info("=== Gerenciamento de Estoque ===");
+        System.out.println("1. Cadastrar Peça");
+        System.out.println("2. Editar Peça");
+        System.out.println("3. Remover Peça");
+        System.out.println("4. Listar Peças");
+        System.out.println("5. Buscar Peça pelo Nome");
+        System.out.println("6. Voltar Para o Menu de Gerente");
+        System.out.print("Escolha uma opção: ");
+
+        try {
+            opcao = scanner.nextInt();
+            if (scanner.hasNextLine()) {
+                scanner.nextLine(); // Limpar o buffer
+            }
+
+            switch (opcao) {
+                case 1:
+                    // Cadastrar Peça
+                    System.out.print("Informe o ID da peça: ");
+                    int idPecaCadastrar = scanner.nextInt();
+                    System.out.print("Informe o nome da peça: ");
+                    String nomeCadastrar = scanner.next();
+                    System.out.print("Informe a categoria: ");
+                    String categoriaCadastrar = scanner.next();
+                    System.out.print("Informe o fabricante: ");
+                    String fabricanteCadastrar = scanner.next();
+                    System.out.print("Informe o preço: ");
+                    double precoCadastrar = scanner.nextDouble();
+                    System.out.print("Informe a quantidade em estoque: ");
+                    int quantidadeCadastrar = scanner.nextInt();
+
+                    PecaController.criaPeca(idPecaCadastrar, nomeCadastrar, categoriaCadastrar, fabricanteCadastrar, precoCadastrar, quantidadeCadastrar);
+                    Logg.info("Peça cadastrada com sucesso!");
+                    break;
+
+                case 2:
+                    // Editar Peça
+                    System.out.print("Informe o ID da peça que deseja editar: ");
+                    Logg.info("=== Editar de Peça do Estoque ===");
+                    System.out.println("1. Atualizar Nome da Peça");
+                    System.out.println("2. Atualizar Categoria da Peça");
+                    System.out.println("3. Atualizar Fabricante da Peça");
+                    System.out.println("4. Atualizar Preço da Peças");
+                    System.out.println("5. atualizar Quantidade de Peças");
+                    System.out.println("6. Voltar Para o Menu de Gerente");
+                    System.out.print("Escolha uma opção: ");
+
+
+                    int idPecaEditar = scanner.nextInt();
+                    Peca pecaEditar = PecaController.buscarPeca(idPecaEditar);
+
+                    if (pecaEditar != null) {
+                        System.out.print("Informe o novo nome (atual: " + pecaEditar.getNome() + "): ");
+                        String novoNome = scanner.next();
+                        System.out.print("Informe a nova categoria (atual: " + pecaEditar.getCategoria() + "): ");
+                        String novaCategoria = scanner.next();
+                        System.out.print("Informe o novo fabricante (atual: " + pecaEditar.getFabricante() + "): ");
+                        String novoFabricante = scanner.next();
+                        System.out.print("Informe o novo preço (atual: " + pecaEditar.getPreco() + "): ");
+                        double novoPreco = scanner.nextDouble();
+                        System.out.print("Informe a nova quantidade em estoque (atual: " + pecaEditar.getQuantidadeEstoque() + "): ");
+                        int novaQuantidade = scanner.nextInt();
+
+                        PecaController.editarPeca(idPecaEditar, novoNome, novaCategoria, novoFabricante, novoPreco, novaQuantidade);
+                        Logg.info("Peça editada com sucesso!");
+                    } else {
+                        Logg.warning("Peça não encontrada!");
+                    }
+                    break;
+
+                case 3:
+                    // Remover Peça
+                    System.out.print("Informe o ID da peça que deseja remover: ");
+                    int idPecaRemover = scanner.nextInt();
+                    if (PecaController.excluirPeca(idPecaRemover)) {
+                        Logg.info("Peça removida com sucesso!");
+                    } else {
+                        Logg.warning("Peça não encontrada!");
+                    }
+                    break;
+
+                case 4:
+                    // Listar Peças
+                    List<Peca> pecas = PecaController.listarPeca();
+                    Logg.info("=== Lista de Peças ===");
+                    if (pecas.isEmpty()) {
+                        Logg.info("Nenhuma peça cadastrada.");
+                    } else {
+                        for (Peca peca : pecas) {
+                            System.out.println(peca);
+                        }
+                    }
+                    break;
+
+                case 5:
+                    // Buscar Peça pelo Nome
+                    System.out.print("Informe o nome da peça que deseja buscar: ");
+                    String nomeBuscar = scanner.next();
+                    Peca pecaBuscar = PecaController.buscarPecaByNome(nomeBuscar);
+                    
+                    if (pecaBuscar != null) {
+                        System.out.println(pecaBuscar);
+                    } else {
+                        Logg.warning("Peça não encontrada!");
+                    }
+                    break;
+
+                case 6:
+                    Logg.info("Retornando ao menu de gerenciamento de funcionários...");
+                    break;
+
+                default:
+                    Logg.warning("Opção inválida, tente novamente.");
+            }
+
+        } catch (InputMismatchException e) {
+            Logg.warning("Erro: informe um valor válido.");
+            if (scanner.hasNextLine()) {
+                scanner.nextLine(); // Limpar o buffer
+            }
+        } catch (Exception e) {
+            Logg.warning(e.getMessage());
+        }
+    } while (opcao != 6);
+  }
 }
+
+/*if(scanner.hasNextLine()){
+    scanner.nextLine();
+}
+Logg.info("<><><><> Atualização de estoque <><><><>");
+PecaController.listarPecasPorCategoria();
+Logg.info("Digite o ID da peca que deseja atualizar:");
+System.out.print("ID: ");
+id = scanner.nextInt();
+
+Logg.info("Informe a quantidade que será adicionada ao estoque:");
+quantidade = scanner.nextInt();
+
+try {
+    PecaController.atualizarEstoqueByIdPeca(quantidade, id);
+    Logg.info("Estoque da peça de ID " + id + " atualizado com sucesso!");
+} catch (IllegalArgumentException e) {
+    Logg.warning("Erro ao atualizar estoque: " + e.getMessage());
+}
+break;*/
