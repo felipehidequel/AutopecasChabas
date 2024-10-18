@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-import control.FuncionarioController;
 import utils.Utils;
 
 import model.entity.Funcionario;
@@ -9,7 +8,6 @@ import view.TelaFuncionario;
 import view.TelaGerente;
 import view.TelaLogin;
 import java.util.InputMismatchException;
-import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -22,11 +20,6 @@ public class App {
 
     public static void menu(Scanner scanner) {
         int opcao = 0;
-
-        List<Funcionario> funcionarios = FuncionarioController.listarFuncionarios();
-        if (funcionarios.isEmpty()) {
-            FuncionarioController.criaFuncionario("admin", "admin123", "admin123", true);
-        }
 
         do {
             Utils.clearScreen();
@@ -44,8 +37,6 @@ public class App {
                         Funcionario user = TelaLogin.login(scanner);
                         if (user != null) {
                             Logg.info("Login bem sucedido!");
-                            Utils.pause(scanner);
-                            Utils.clearScreen();
                             if (user.getGerente()) {
                                 TelaGerente.menuGerente(scanner);
                             } else {

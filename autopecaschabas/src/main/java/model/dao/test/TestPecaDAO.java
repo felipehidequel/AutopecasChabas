@@ -17,7 +17,7 @@ public class TestPecaDAO implements TestDaoComponent {
 
             // Editando a peça criada
             peca.setNome("Pneu de moto");
-            PecaDAO.editaPeca(peca);
+            PecaDAO.editarPeca(peca);
             System.out.println("Peça editada com sucesso!");
 
             // Listando todas as peças

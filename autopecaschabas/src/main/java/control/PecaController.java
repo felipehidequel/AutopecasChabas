@@ -55,7 +55,7 @@ public class PecaController{
         }
 
         var pe = new Peca(idpeca, nome, categoria, fabricante, preco, quantidadeEstoque);
-        PecaDAO.editaPeca(pe);
+        PecaDAO.editarPeca(pe);
         return (pe);
     }
 
@@ -76,7 +76,7 @@ public class PecaController{
 
     public static List<Peca> listarPeca(){
         try{
-            List<Peca> pecas = PecaDAO.listarPecas();
+            List<Peca> pecas = PecaDAO.listaPecas();
             return pecas != null ? pecas : new ArrayList<>();
 
         }catch(Exception e){
@@ -86,7 +86,7 @@ public class PecaController{
     }
 
     public static void listarPecasPorCategoria() {
-        List<Peca> pecas = PecaDAO.listarPecas();
+        List<Peca> pecas = PecaDAO.listaPecas();
 
         Map<String, List<Peca>> pecasPorCategoria = pecas.stream()
                 .collect(Collectors.groupingBy(Peca::getCategoria));
@@ -135,10 +135,15 @@ public class PecaController{
 
         if (peca != null) {
             peca.setQuantidadeEstoque(quantidadeEstoque);
-            PecaDAO.editaPeca(peca);
+            PecaDAO.editarPeca(peca);
         } else {
             throw new IllegalArgumentException("Peça de ID " + idpeca + " não encontrada.");
         }
+    }
+
+    public static void editarPeca(Peca peca) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'editarPeca'");
     }
 }
 
