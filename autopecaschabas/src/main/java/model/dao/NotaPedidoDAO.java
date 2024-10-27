@@ -124,7 +124,7 @@ public class NotaPedidoDAO {
                     int quantidadePeca = rs.getInt("qntd");
                     Peca peca = PecaDAO.buscarPecaById(rs.getInt("id_peca"));
                     Pedido pedido = PedidoDAO.buscarPedidoById(rs.getInt("id_pedido"));
-                    double valorTotal = rs.getDouble("valor");
+                    // double valorTotal = rs.getDouble("valor");
 
                     notaPedidos.add(new NotaPedido(id, quantidadePeca, peca, pedido));
                 }

@@ -87,6 +87,10 @@ public class PecaController{
 
     public static void listarPecasPorCategoria() {
         List<Peca> pecas = PecaDAO.listaPecas();
+        if (pecas.isEmpty()) {
+            System.out.println("Nenhuma peça cadastrada.");
+            return;
+        }
 
         Map<String, List<Peca>> pecasPorCategoria = pecas.stream()
                 .collect(Collectors.groupingBy(Peca::getCategoria));
@@ -139,11 +143,6 @@ public class PecaController{
         } else {
             throw new IllegalArgumentException("Peça de ID " + idpeca + " não encontrada.");
         }
-    }
-
-    public static void editarPeca(Peca peca) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'editarPeca'");
     }
 }
 

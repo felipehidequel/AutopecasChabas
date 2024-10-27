@@ -72,7 +72,7 @@ public class FuncionarioController {
                 }
 
                 if (senha == null || senha.length() < 8) {
-                    throw new IllegalArgumentException("A senha deve ter no mínimo 6 caracteres.");
+                    throw new IllegalArgumentException("A senha deve ter no mínimo 8 caracteres.");
                 }
                 if (!senha.matches(".*[A-Za-z].*") || !senha.matches(".*[0-9].*")) {
                     throw new IllegalArgumentException("A senha deve conter pelo menos uma letra e um número.");
@@ -83,7 +83,7 @@ public class FuncionarioController {
         Funcionario funcionario = buscaFuncionarioById(id);
 
         funcionario.setNome(nome);
-        funcionario.setLogin(login.toLowerCase());
+        funcionario.setLogin(login.toUpperCase());
         funcionario.setSenha(senha);
         funcionario.setGerente(gerente);
 
@@ -144,7 +144,7 @@ public class FuncionarioController {
             throw new IllegalArgumentException("Senha não pode ser nula ou vazia.");
         }
 
-        Funcionario funcionario = FuncionarioDAO.buscaFuncionarioByLogin(login);
+        Funcionario funcionario = FuncionarioDAO.buscaFuncionarioByLogin(login.toUpperCase());
         if (funcionario == null) {
             return null;
         }
