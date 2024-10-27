@@ -55,7 +55,7 @@ public class PecaController{
         }
 
         var pe = new Peca(idpeca, nome, categoria, fabricante, preco, quantidadeEstoque);
-        PecaDAO.editaPeca(pe);
+        PecaDAO.editarPeca(pe);
         return (pe);
     }
 
@@ -135,10 +135,15 @@ public class PecaController{
 
         if (peca != null) {
             peca.setQuantidadeEstoque(quantidadeEstoque);
-            PecaDAO.editaPeca(peca);
+            PecaDAO.editarPeca(peca);
         } else {
             throw new IllegalArgumentException("Peça de ID " + idpeca + " não encontrada.");
         }
+    }
+
+    public static void editarPeca(Peca peca) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'editarPeca'");
     }
 }
 

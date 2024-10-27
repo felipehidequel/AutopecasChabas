@@ -33,7 +33,7 @@ public class PecaDAO {
         }
     }
 
-    public static void editaPeca(Peca peca) {
+    public static void editarPeca(Peca peca) {
         var sql = "UPDATE peca SET nome = ?, categoria = ?, fabricante = ?, preco = ?, quantidade_estoque = ? WHERE id_peca = ?;";
         try (var conn = DB.getConnection()) {
             assert conn != null;

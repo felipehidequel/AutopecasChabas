@@ -6,8 +6,6 @@ import utils.Logg;
 
 import java.util.Scanner;
 
-import utils.Utils;
-
 public class TelaLogin {
     public static Funcionario login(Scanner scanner) {
         String nome, senha;
@@ -21,9 +19,20 @@ public class TelaLogin {
                     System.out.print("nome de usuario: ");
                     nome = scanner.nextLine();
 
+                    if (nome.equals("0")) {
+                        Logg.info("Retornando ao menu principal...");
+                        return null;
+                    }
+
                     Logg.info("Insira a senha: ");
                     System.out.print("senha: ");
                     senha = scanner.nextLine();
+
+                    if (nome.equals("0")) {
+                        Logg.info("Retornando ao menu principal...");
+                        return null; // Retorna null para indicar que o login não foi realizado
+                    }
+
                     func = FuncionarioController.realizarLogin(nome, senha);
                     if (func == null) {
                         Logg.warning("Nome de usuário ou senha incorretos. Por favor, tente novamente.");
