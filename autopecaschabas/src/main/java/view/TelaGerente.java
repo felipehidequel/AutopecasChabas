@@ -189,7 +189,7 @@ public class TelaGerente {
             } catch (Exception e) {
                 Logg.severe("Erro inesperado: " + e.getMessage());
             }
-        } while (opcao != 4);
+        } while (opcao != 5);
     }
 
     private static void editarFuncionario(int id, Funcionario funci, Scanner scanner) {
