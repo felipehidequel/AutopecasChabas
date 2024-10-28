@@ -9,8 +9,6 @@ import utils.Logg;
 import java.util.List;
 import java.util.Scanner;
 
-import org.jcp.xml.dsig.internal.dom.Utils;
-
 import java.util.InputMismatchException;
 
 public class TelaGerente {
