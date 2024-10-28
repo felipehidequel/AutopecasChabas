@@ -44,7 +44,7 @@ public class FuncionarioController {
         if (FuncionarioDAO.buscaFuncionarioByLogin(login) != null)
             throw new IllegalArgumentException("Login já existente!");
 
-        Funcionario novoFuncionario = new Funcionario(nome, login.toLowerCase(), senha, gerente);
+        Funcionario novoFuncionario = new Funcionario(nome, login.toUpperCase(), senha, gerente);
         FuncionarioDAO.criarFuncionario(novoFuncionario);
     }
 // FLAGS
